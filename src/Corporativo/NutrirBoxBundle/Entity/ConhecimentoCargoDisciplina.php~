@@ -1,0 +1,53 @@
+<?php
+
+namespace Corporativo\ConcurseiroBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ConhecimentoCargoDisciplina
+ *
+ * @ORM\Table(name="conhecimento_cargo_disciplina", uniqueConstraints={@ORM\UniqueConstraint(name="idx_pk_conhecimento_cargo_disciplina", columns={"co_conhecimento_cargo_discplina"})}, indexes={@ORM\Index(name="idx_fk_planejamento_estudo_conhec_cargo_disciplina", columns={"co_planejamento_estudo"}), @ORM\Index(name="idx_fk_cargo_disciplina_conhec_cargo_disciplina", columns={"co_cargo_disciplina"})})
+ * @ORM\Entity
+ */
+class ConhecimentoCargoDisciplina
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="co_conhecimento_cargo_discplina", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="conhecimento_cargo_disciplina_co_conhecimento_cargo_discplina_seq", allocationSize=1, initialValue=1)
+     */
+    private $coConhecimentoCargoDiscplina;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nu_nivel_conhecimento", type="smallint", nullable=false)
+     */
+    private $nuNivelConhecimento;
+
+    /**
+     * @var \CargoDisciplina
+     *
+     * @ORM\ManyToOne(targetEntity="CargoDisciplina")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="co_cargo_disciplina", referencedColumnName="co_cargo_disciplina")
+     * })
+     */
+    private $coCargoDisciplina;
+
+    /**
+     * @var \PlanejamentoEstudo
+     *
+     * @ORM\ManyToOne(targetEntity="PlanejamentoEstudo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="co_planejamento_estudo", referencedColumnName="co_planejamento_estudo")
+     * })
+     */
+    private $coPlanejamentoEstudo;
+
+
+}

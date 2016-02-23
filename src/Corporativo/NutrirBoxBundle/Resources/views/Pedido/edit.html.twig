@@ -1,0 +1,26 @@
+    {% extends 'NutrirBoxBundle::base.html.twig' %}
+    {% block title %} Pedido {% endblock %}
+    {% block header %} Pedido {% endblock %}
+    {% block subheader %} Editar {% endblock %}
+
+{% block body -%}
+
+    {{ form(edit_form) }}
+
+        <p>
+    <a href="{{ path('admin_pedido') }}" class="btn">
+        <i class="ace-icon fa fa-arrow-left bigger-120"></i>
+        Listar
+    </a>
+                <a href="#" class="btn btn-delete">
+            <i class="ace-icon fa fa-trash bigger-120"></i>
+            Deletar
+        </a>
+        {{ form(delete_form) }}
+    </p>{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src='{{asset('bundles/nutrirbox/dist/js/config/deletar.js')}}'></script>
+{% endblock %}
+ 

@@ -1,0 +1,54 @@
+<?php
+
+namespace Corporativo\ConcurseiroBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ReferenciaValor
+ *
+ * @ORM\Table(name="referencia_valor")
+ * @ORM\Entity
+ */
+class ReferenciaValor
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="co_referencia_valor", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="referencia_valor_co_referencia_valor_seq", allocationSize=1, initialValue=1)
+     */
+    private $coReferenciaValor;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="vl_valor", type="decimal", precision=16, scale=2, nullable=false)
+     */
+    private $vlValor;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dt_inicio_validade", type="date", nullable=false)
+     */
+    private $dtInicioValidade;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dt_fim_validade", type="date", nullable=true)
+     */
+    private $dtFimValidade;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_ativo", type="boolean", nullable=false)
+     */
+    private $isAtivo;
+
+
+}

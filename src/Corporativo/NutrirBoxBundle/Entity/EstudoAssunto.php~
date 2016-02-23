@@ -1,0 +1,56 @@
+<?php
+
+namespace Corporativo\ConcurseiroBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * EstudoAssunto
+ *
+ * @ORM\Table(name="estudo_assunto", uniqueConstraints={@ORM\UniqueConstraint(name="idx_pk_estudo_assunto", columns={"co_estudo_assunto"})}, indexes={@ORM\Index(name="idx_fk_assunto_estudo_assunto", columns={"co_assunto"}), @ORM\Index(name="idx_fk_tipo_estudo_estudo_assunto", columns={"co_tipo_estudo"}), @ORM\Index(name="idx_fk_dia_horario_estudo_estudo_assunto", columns={"co_dia_horario_estudo"})})
+ * @ORM\Entity
+ */
+class EstudoAssunto
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="co_estudo_assunto", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="estudo_assunto_co_estudo_assunto_seq", allocationSize=1, initialValue=1)
+     */
+    private $coEstudoAssunto;
+
+    /**
+     * @var \Assunto
+     *
+     * @ORM\ManyToOne(targetEntity="Assunto")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="co_assunto", referencedColumnName="co_assunto")
+     * })
+     */
+    private $coAssunto;
+
+    /**
+     * @var \DiaHorarioEstudo
+     *
+     * @ORM\ManyToOne(targetEntity="DiaHorarioEstudo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="co_dia_horario_estudo", referencedColumnName="co_dia_horario_estudo")
+     * })
+     */
+    private $coDiaHorarioEstudo;
+
+    /**
+     * @var \TipoEstudo
+     *
+     * @ORM\ManyToOne(targetEntity="TipoEstudo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="co_tipo_estudo", referencedColumnName="co_tipo_estudo")
+     * })
+     */
+    private $coTipoEstudo;
+
+
+}

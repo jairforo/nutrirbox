@@ -1,0 +1,39 @@
+<?php
+
+namespace Corporativo\NutrirBoxBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * TipoIngrediente
+ *
+ * @ORM\Table(name="tipo_ingrediente")
+ * @ORM\Entity
+ */
+class TipoIngrediente
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="co_tipo_ingrediente", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $coTipoIngrediente;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="no_nome", type="string", length=45, nullable=false)
+     */
+    private $noNome;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_ativo", type="boolean", nullable=true)
+     */
+    private $isAtivo;
+
+
+}

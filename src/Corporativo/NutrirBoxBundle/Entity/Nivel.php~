@@ -1,0 +1,40 @@
+<?php
+
+namespace Corporativo\ConcurseiroBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Nivel
+ *
+ * @ORM\Table(name="nivel", uniqueConstraints={@ORM\UniqueConstraint(name="idx_pk_nivel", columns={"co_nivel"})})
+ * @ORM\Entity
+ */
+class Nivel
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="co_nivel", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="nivel_co_nivel_seq", allocationSize=1, initialValue=1)
+     */
+    private $coNivel;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="no_nome", type="string", length=300, nullable=false)
+     */
+    private $noNome;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="de_descricao", type="text", nullable=true)
+     */
+    private $deDescricao;
+
+
+}

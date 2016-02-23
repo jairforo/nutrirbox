@@ -1,0 +1,49 @@
+
+    /**
+{% block phpdoc_method_header %}
+     * Lists all {{ entity }} entities.
+{% endblock phpdoc_method_header %}
+     *
+{% block phpdoc_method_annotations %}
+{% if 'annotation' == format %}
+     * @Route("/", name="{{ route_name_prefix }}")
+     * @Method("GET")
+     * @Template()
+     * @Security("has_role('ROLE_ADMIN')")
+{% endif %}
+{% endblock phpdoc_method_annotations %}
+     */
+{% block method_definition %}
+    public function indexAction()
+{% endblock method_definition %}
+    {
+{% block method_body %}
+        #BreadCrumbs
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Dashboard", $this->get("router")->generate("admin_dashboard"));
+        $breadcrumbs->addItem("{{ entity }}");
+    
+        $em = $this->getDoctrine()->getManager();
+        
+        if ( property_exists(new {{ entity }}, 'isAtivo')) {
+            $entities = $em->getRepository('{{ bundle }}:{{ entity }}')->findBy(array('isAtivo' => 'true'));
+        } else {
+            $entities = $em->getRepository('{{ bundle }}:{{ entity }}')->findAll();
+        }
+        
+        $deleteForm = $this->createDeleteForm(0);
+{% endblock method_body %}
+
+{% block method_return %}
+{% if 'annotation' == format %}
+        return array(
+            'entities' => $entities,
+            'delete_form' => $deleteForm->createView()
+        );
+{% else %}
+        return $this->render('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:index.html.twig', array(
+            'entities' => $entities,
+        ));
+{% endif %}
+{% endblock method_return %}
+    }

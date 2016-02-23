@@ -1,0 +1,9 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+#parameters:
+#    security.exception_listener.class: Corporativo\NutrirBoxBundle\Security\Firewall\ExceptionListener
+    
+services:
+    app.utils.message:
+        class: Corporativo\NutrirBoxBundle\Utils\Message
+        #arguments: ["@another_service_name", "plain_value", "%parameter_name%"]

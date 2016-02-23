@@ -1,0 +1,23 @@
+{% block extends %}
+    {{ "{% extends 'NutrirBoxBundle::base.html.twig' %}" }}
+    {{ "{% block title %} "}}{{ entity }}{{" {% endblock %}" }}
+    {{ "{% block header %} "}}{{ entity }}{{" {% endblock %}" }}
+    {{ "{% block subheader %} Editar {% endblock %}" }}
+{% endblock extends %}
+
+{% block body %}
+{{ "{% block body -%}" }}
+
+    {{ '{{ form(edit_form) }}' }}
+
+    {% set hide_edit, hide_delete = true, false %}
+    {% include 'crud/views/others/record_actions.html.twig.twig' %}
+{{ "{% endblock %}" }}
+{% endblock body %}
+
+{% block javascripts %}
+{{ "{% block javascripts %}" }}
+    {{ "{{ parent() }}" }}
+    {{ "<script src='{{asset('bundles/nutrirbox/dist/js/config/deletar.js')}}'></script>"}}
+{{ "{% endblock %}" }}
+{% endblock %} 

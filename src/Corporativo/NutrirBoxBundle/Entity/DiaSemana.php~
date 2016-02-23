@@ -1,0 +1,43 @@
+<?php
+
+namespace Corporativo\ConcurseiroBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * DiaSemana
+ *
+ * @ORM\Table(name="dia_semana", uniqueConstraints={@ORM\UniqueConstraint(name="idx_pk_dia_semana", columns={"co_dia_semana"}), @ORM\UniqueConstraint(name="idx_dia_semana", columns={"co_planejamento_semanal", "no_dia_semana"})}, indexes={@ORM\Index(name="idx_fk_planejamento_semanal_dia_semana", columns={"co_planejamento_semanal"})})
+ * @ORM\Entity
+ */
+class DiaSemana
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="co_dia_semana", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="dia_semana_co_dia_semana_seq", allocationSize=1, initialValue=1)
+     */
+    private $coDiaSemana;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="no_dia_semana", type="string", length=3, nullable=false)
+     */
+    private $noDiaSemana;
+
+    /**
+     * @var \PlanejamentoSemanal
+     *
+     * @ORM\ManyToOne(targetEntity="PlanejamentoSemanal")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="co_planejamento_semanal", referencedColumnName="co_planejamento_semanal")
+     * })
+     */
+    private $coPlanejamentoSemanal;
+
+
+}

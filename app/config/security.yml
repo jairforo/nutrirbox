@@ -1,0 +1,46 @@
+#jms_security_extra:
+#    secure_all_services: false;
+#    expressions: true
+
+security:
+    encoders:
+        Corporativo\NutrirBoxBundle\Entity\Pessoa: sha512
+        
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        
+    providers:
+      conexao_auth: 
+          entity: { class: Corporativo\NutrirBoxBundle\Entity\Pessoa}
+
+    firewalls:
+        #default:
+          #  remember_me:
+         #       key: "%secret%"
+          #      lifetime: 604800
+         #       path: /user
+                
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+            
+        secured_area:
+            pattern: ^/
+            form_login:
+                check_path: /auth/login_check
+                login_path: /auth/login
+                default_target_path: /auth/app
+                csrf_provider: security.csrf.token_manager
+                intention: authenticate
+                
+            logout:
+                path: /auth/logout
+                target: /auth/login
+            anonymous: ~
+            
+    
+    access_control:
+        - { path: ^/admin, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/user, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/user/pessoa/create, roles: IS_AUTHENTICATED_ANONYMOUSLY }                

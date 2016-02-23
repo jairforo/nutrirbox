@@ -1,0 +1,64 @@
+<?php
+
+namespace Corporativo\ConcurseiroBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Aluno
+ *
+ * @ORM\Table(name="aluno", indexes={@ORM\Index(name="idx_fk_instituicao_ensino_promocao_aluno", columns={"co_instituicao_ensino_promocao"})})
+ * @ORM\Entity
+ */
+class Aluno
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="co_aluno", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="aluno_co_aluno_seq", allocationSize=1, initialValue=1)
+     */
+    private $coAluno;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nu_cpf", type="decimal", precision=11, scale=0, nullable=true)
+     */
+    private $nuCpf;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="no_email", type="string", length=50, nullable=true)
+     */
+    private $noEmail;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="ts_cadastro", type="datetime", nullable=true)
+     */
+    private $tsCadastro;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_utilizado", type="boolean", nullable=true)
+     */
+    private $isUtilizado;
+
+    /**
+     * @var \InstituicaoEnsinoPromocao
+     *
+     * @ORM\ManyToOne(targetEntity="InstituicaoEnsinoPromocao")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="co_instituicao_ensino_promocao", referencedColumnName="co_instituicao_ensino_promocao")
+     * })
+     */
+    private $coInstituicaoEnsinoPromocao;
+
+
+}

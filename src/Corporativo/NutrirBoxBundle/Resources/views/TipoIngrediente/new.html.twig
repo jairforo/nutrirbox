@@ -1,0 +1,20 @@
+    {% extends 'NutrirBoxBundle::base.html.twig' %}
+    {% block title %} Tipo de Ingrediente {% endblock %}
+    {% block header %} Tipo de Ingrediente {% endblock %}
+    {% block subheader %} Novo {% endblock %}
+
+{% block body -%}
+
+    {{ form(form) }}
+
+        <p>
+    <a href="{{ path('admin_tipoingrediente') }}" class="btn">
+        <i class="ace-icon fa fa-arrow-left bigger-120"></i>
+        Listar
+    </a>
+        </p>{% endblock %}
+
+{% block javascripts %}
+   {{ parent() }}
+   <script src='{{asset('bundles/nutrirbox/dist/js/config/formulario.js')}}'></script>
+{% endblock %}

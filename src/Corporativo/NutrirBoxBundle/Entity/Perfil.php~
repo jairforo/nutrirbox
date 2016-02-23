@@ -1,0 +1,39 @@
+<?php
+
+namespace Corporativo\NutrirBoxBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Perfil
+ *
+ * @ORM\Table(name="perfil")
+ * @ORM\Entity
+ */
+class Perfil
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="co_perfil", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $coPerfil;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="no_nome", type="string", length=45, nullable=false)
+     */
+    private $noNome;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_ativo", type="boolean", nullable=false)
+     */
+    private $isAtivo;
+
+
+}

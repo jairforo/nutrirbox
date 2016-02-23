@@ -1,0 +1,21 @@
+{% block extends %}
+    {{ "{% extends 'NutrirBoxBundle::base.html.twig' %}" }}
+    {{ "{% block title %} "}}{{ entity }}{{" {% endblock %}" }}
+    {{ "{% block header %} "}}{{ entity }}{{" {% endblock %}" }}
+    {{ "{% block subheader %} Novo {% endblock %}" }}
+{% endblock extends %}
+
+{% block body %}
+{{ "{% block body -%}" }}
+
+    {{ '{{ form(form) }}' }}
+
+    {% set hide_edit, hide_delete = true, true %}
+    {% include 'crud/views/others/record_actions.html.twig.twig' %}
+{{ "{% endblock %}" }}
+{% endblock body %}
+
+{{ "{% block javascripts %}" }}
+   {{"{{ parent() }}"}}
+   <script src='{{"{{asset('bundles/nutrirbox/dist/js/config/formulario.js')}}"}}'></script>
+{{ "{% endblock %}" }}

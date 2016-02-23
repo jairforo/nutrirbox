@@ -1,0 +1,82 @@
+{% extends "NutrirBoxBundle::base.html.twig" %}
+
+{% block title %}Dashboard{% endblock %}
+{% block header %} Dashboard {% endblock %}
+{% block subheader %} Estatíticas {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="{{ asset('bundles/nutrirbox/dist/css/bootstrap-tour.min.css') }}" />
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-xs-12">
+        </div>
+    </div>
+{% endblock %} 
+
+{% block javascripts %}
+    {{ parent() }}
+    <!-- ace scripts -->
+    <script src="{{asset('bundles/nutrirbox/dist/js/bootstrap-tour.min.js')}}"></script>
+    <script src="{{asset('bundles/nutrirbox/dist/js/bootstrap-tour-standalone.min.js')}}"></script>
+    <script type="text/javascript">
+        $(function () {
+            //bootbox.alert('Olá, Jair Foro seja bem vindo ao nosso Sistema');
+            
+            var tour = new Tour({
+                name: "tour-welcome",
+                backdrop: true,
+                backdropPadding: 0,
+                template: "<div class='popover tour' style='max-width: 570px;'>" +
+                        "	<div class='arrow'></div>" +
+                        "		<h3 class='popover-title'></h3>" +
+                        "		<div class='popover-content'></div>" +
+                        "		<div class='popover-navigation'>" +
+                        "			<button class='btn btn-default' data-role='prev'>« Anterior</button>" +
+                        "			<button class='btn btn-default' data-role='next'>Proximo »</button>" +
+                        "			<span data-role='separator'>&nbsp;</span>" +
+                        "			<button class='btn btn-default' data-role='end'>Finalizar</button>" +
+                        "		</div>" +
+                        "</div>",
+                steps: [
+                    {
+                        placement: "bottom",
+                        element: ".light-blue",
+                        title: "Apresentação Geral",
+                        content: "<p>Nesta primeira etapa, que envolve o diagnóstico da rede de ensino, o sistema apresenta os 6 ícones que estão em destaque.</p>" +
+                                "<p>A seguir, faremos uma visita guiada em cada um desses ícones.</p>"
+                    },
+                    {
+                        placement: "bottom",
+                        element: "#sidebar-shortcuts",
+                        title: "Apresentação Geral",
+                        content: "<p>Nesta primeira etapa, que envolve o diagnóstico da rede de ensino, o sistema apresenta os 6 ícones que estão em destaque.</p>" +
+                                "<p>A seguir, faremos uma visita guiada em cada um desses ícones.</p>"
+                    },
+                    {
+                        placement: "bottom",
+                        element: ".light-blue",
+                        title: "Diagnóstico",
+                        content: "<p>O diagnóstico tem por objetivo promover uma ampla reflexão acerca da situação educacional da rede municipal ou estadual/distrital. Assim, a coleta de informações e o seu detalhamento deverão ser realizados em conjunto pela equipe técnica local.</p>" +
+                                "<p>Ao clicar neste ícone o usuário avançará para o início do seu Diagnóstico. Caso tenha esquecido de preencher alguns dos campos obrigatórios dos ícones anteriores, no entanto, o sistema emitirá um alerta e mostrará quais os campos estão faltando ser preenchidos.</p>",
+                        {#onNext: function () {
+                            document.location.href = "par3.php?modulo=principal/planoTrabalho/indicadoresQualitativos&acao=A&inuid=" + $('#inuid').val() + "&visualizar-sintese-diagnostico=1&tour=1";
+                        }#}
+                    },
+                    {
+                        orphan: true,
+                        title: "Diagnóstico",
+                        content: "Aguarde redirecionando...",
+                        container: "body",
+                    }
+                ]});
+
+            $('.tourn-btn').on('click', function () {
+                tour.restart();
+            });
+        });
+    </script>
+{% endblock %} 

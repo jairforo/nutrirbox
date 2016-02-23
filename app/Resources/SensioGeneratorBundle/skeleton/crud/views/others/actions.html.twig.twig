@@ -1,0 +1,54 @@
+<div class="hidden-sm hidden-xs btn-group">
+    {%- for action in record_actions %}
+    {% if action == 'show' %}
+        <a href="{{ "{{ path('" ~ route_name_prefix ~ "_" ~ action ~ "', { 'id': entity."~ identifier ~" }) }}" }}" class="btn btn-xs btn-warning" title="Detalhar">
+            <i class="ace-icon fa fa-search-plus bigger-120"></i>
+        </a>
+    {% endif %}
+    {% if action == 'edit' %}
+        <a href="{{ "{{ path('" ~ route_name_prefix ~ "_" ~ action ~ "', { 'id': entity."~ identifier ~" }) }}" }}" class="btn btn-xs btn-info" title="Editar">
+            <i class="ace-icon fa fa-pencil bigger-120"></i>
+        </a>
+    {% endif %}
+    {%- endfor %}
+    <a class="btn btn-xs btn-danger btn-delete" id="{{ '{{ entity.' ~ identifier ~ ' }}' }}" title="Deletar">
+        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+    </a>
+</div>
+<div class="hidden-md hidden-lg">
+    <div class="inline pos-rel">
+        <button data-position="auto" data-toggle="dropdown" class="btn btn-minier btn-primary dropdown-toggle">
+            <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+        </button>
+
+        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+            {%- for action in record_actions %}
+            {% if action == 'show' %}
+                <li>
+                    <a href="{{ "{{ path('" ~ route_name_prefix ~ "_" ~ action ~ "', { 'id': entity."~ identifier ~" }) }}" }}" title="Detalhar" data-rel="tooltip" class="tooltip-info" href="#" data-original-title="Detalhar">
+                        <span class="blue">
+                            <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                        </span>
+                    </a>
+                </li>
+            {% endif %}
+            {% if action == 'edit' %}
+                <li>
+                    <a href="{{ "{{ path('" ~ route_name_prefix ~ "_" ~ action ~ "', { 'id': entity."~ identifier ~" }) }}" }}" title="Editar" data-rel="tooltip" class="tooltip-success" href="#" data-original-title="Editar">
+                        <span class="green">
+                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                        </span>
+                    </a>
+                </li>
+            {% endif %}
+            {%- endfor %}
+            <li>
+                <a title="Deletar" data-rel="tooltip" id="{{ '{{ entity.' ~ identifier ~ ' }}' }}" class="tooltip-error btn-delete" href="#" data-original-title="Deletar">
+                    <span class="red">
+                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

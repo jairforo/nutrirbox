@@ -1,0 +1,88 @@
+<?php
+
+namespace Corporativo\ConcurseiroBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Cargo
+ *
+ * @ORM\Table(name="cargo", uniqueConstraints={@ORM\UniqueConstraint(name="idx_pk_cargo", columns={"co_cargo"})}, indexes={@ORM\Index(name="idx_fk_concurso_cargo", columns={"co_concurso"}), @ORM\Index(name="idx_fk_nivel_cargo", columns={"co_nivel"})})
+ * @ORM\Entity
+ */
+class Cargo
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="co_cargo", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="cargo_co_cargo_seq", allocationSize=1, initialValue=1)
+     */
+    private $coCargo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="no_nome", type="string", length=300, nullable=false)
+     */
+    private $noNome;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="de_descricao", type="text", nullable=true)
+     */
+    private $deDescricao;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="vl_salario_base", type="decimal", precision=16, scale=2, nullable=true)
+     */
+    private $vlSalarioBase;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nu_carga_horario", type="smallint", nullable=true)
+     */
+    private $nuCargaHorario;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nu_cargo", type="smallint", nullable=true)
+     */
+    private $nuCargo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="nu_qtd_vagas", type="smallint", nullable=true)
+     */
+    private $nuQtdVagas;
+
+    /**
+     * @var \Concurso
+     *
+     * @ORM\ManyToOne(targetEntity="Concurso")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="co_concurso", referencedColumnName="co_concurso")
+     * })
+     */
+    private $coConcurso;
+
+    /**
+     * @var \Nivel
+     *
+     * @ORM\ManyToOne(targetEntity="Nivel")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="co_nivel", referencedColumnName="co_nivel")
+     * })
+     */
+    private $coNivel;
+
+
+}

@@ -1,0 +1,68 @@
+<?php
+
+namespace Corporativo\ConcurseiroBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Atividade
+ *
+ * @ORM\Table(name="atividade", uniqueConstraints={@ORM\UniqueConstraint(name="idx_pk_atividade", columns={"co_atividade"})})
+ * @ORM\Entity
+ */
+class Atividade
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="co_atividade", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="atividade_co_atividade_seq", allocationSize=1, initialValue=1)
+     */
+    private $coAtividade;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="no_nome", type="string", length=300, nullable=false)
+     */
+    private $noNome;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="de_descricao", type="text", nullable=true)
+     */
+    private $deDescricao;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="no_cor", type="string", length=50, nullable=true)
+     */
+    private $noCor;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="hr_minimo_regra", type="time", nullable=true)
+     */
+    private $hrMinimoRegra;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="hr_maximo_regra", type="time", nullable=true)
+     */
+    private $hrMaximoRegra;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_paralelo_regra", type="boolean", nullable=false)
+     */
+    private $isParaleloRegra;
+
+
+}

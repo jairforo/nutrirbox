@@ -1,0 +1,8 @@
+NutrirBoxBundle:
+    resource: "@NutrirBoxBundle/Resources/config/routing.yml"
+    prefix:   /
+    
+NutrirBoxBundle2:
+    resource: "@NutrirBoxBundle/Controller"
+    prefix:   /
+    type: annotation

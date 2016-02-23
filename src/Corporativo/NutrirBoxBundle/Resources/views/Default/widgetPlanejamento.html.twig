@@ -1,0 +1,39 @@
+{% if entities %}
+    <li class="grey">
+        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <i class="ace-icon fa fa-book icon-animated-bell"></i>
+            <span class="badge badge-grey">{{ entities|length }}</span>
+        </a>
+        <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+            <li class="dropdown-header">
+                <i class="ace-icon fa fa-check"></i>
+                {{ entities|length }} Planejamento(s) de Estudo
+            </li>
+            {% for entity in entities %}
+                <li class="dropdown-content">
+                    <ul class="dropdown-menu dropdown-navbar">
+                        <li>
+                            <a href="{{ path('user_planejamentoestudo_show', {'id' : entity.coPlanejamentoEstudo})}}">
+                                <div class="clearfix">
+                                    <span class="pull-left">{{ entity.concurso|upper }}</span>
+                                    <span class="pull-right">{{ entity.valor }}%</span>
+                                </div>
+                                <div class="progress progress-mini">
+                                    <div style="width:{{ entity.valor }}%" class="progress-bar"></div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            {% endfor %}
+            {% if entities|length > 1 %}
+            <li class="dropdown-footer">
+                <a href="{{ path('user_planejamentoestudo')}}">
+                    Ver todos...
+                    <i class="ace-icon fa fa-arrow-right"></i>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </li>
+{% endif %}

@@ -1,0 +1,76 @@
+<?php
+
+namespace Corporativo\NutrirBoxBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Endereco
+ *
+ * @ORM\Table(name="endereco")
+ * @ORM\Entity
+ */
+class Endereco
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="co_endereco", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $coEndereco;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="co_pessoa", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $coPessoa;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="no_logradouro", type="string", length=150, nullable=false)
+     */
+    private $noLogradouro;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nu_numero", type="string", length=45, nullable=true)
+     */
+    private $nuNumero;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="no_bairro", type="string", length=50, nullable=true)
+     */
+    private $noBairro;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nu_cep", type="string", length=45, nullable=true)
+     */
+    private $nuCep;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="no_cidade", type="string", length=100, nullable=true)
+     */
+    private $noCidade;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_ativo", type="boolean", nullable=true)
+     */
+    private $isAtivo;
+
+
+}

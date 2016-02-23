@@ -1,0 +1,64 @@
+<?php
+
+namespace Corporativo\ConcurseiroBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * DiaHorarioEstudo
+ *
+ * @ORM\Table(name="dia_horario_estudo", uniqueConstraints={@ORM\UniqueConstraint(name="idx_pk_dia_horario_estudo", columns={"co_dia_horario_estudo"})}, indexes={@ORM\Index(name="idx_fk_planejamento_estudo_dia_horario_estudo", columns={"co_planejamento_estudo"})})
+ * @ORM\Entity
+ */
+class DiaHorarioEstudo
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="co_dia_horario_estudo", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="dia_horario_estudo_co_dia_horario_estudo_seq", allocationSize=1, initialValue=1)
+     */
+    private $coDiaHorarioEstudo;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dt_dia", type="date", nullable=false)
+     */
+    private $dtDia;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="hr_inicio", type="time", nullable=false)
+     */
+    private $hrInicio;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="hr_fim", type="time", nullable=false)
+     */
+    private $hrFim;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_estudado", type="boolean", nullable=false)
+     */
+    private $isEstudado;
+
+    /**
+     * @var \PlanejamentoEstudo
+     *
+     * @ORM\ManyToOne(targetEntity="PlanejamentoEstudo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="co_planejamento_estudo", referencedColumnName="co_planejamento_estudo")
+     * })
+     */
+    private $coPlanejamentoEstudo;
+
+
+}

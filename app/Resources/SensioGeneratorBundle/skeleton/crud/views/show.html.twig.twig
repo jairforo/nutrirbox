@@ -1,0 +1,60 @@
+{% block extends %}
+    {{ "{% extends 'NutrirBoxBundle::base.html.twig' %}" }}
+    {{ "{% block title %} "}}{{ entity }}{{" {% endblock %}" }}
+    {{ "{% block header %} "}}{{ entity }}{{" {% endblock %}" }}
+    {{ "{% block subheader %} Detalhe {% endblock %}" }}
+{% endblock extends %}
+
+{% block body %}
+{{ "{% block body -%}" }}
+    <div class="profile-user-info profile-user-info-striped">
+        {%- for field, metadata in fields %}
+
+            <div class="profile-info-row">
+                <div class="profile-info-name"> {{ field[2:]|capitalize }} </div>
+                <!-- {{ metadata.type }} -->
+                
+            {%- if metadata.type == 'date' %}                
+                <div class="profile-info-value">                    
+                    {% set dateField = 'entity.' ~ field|replace({'_': ''}) %}
+                    <span> {{'{{'}} {{ dateField }} != '' ? {{ dateField }}|date('d/m/Y') : '' {{'}}'}} </span>
+                </div>
+            {%- elseif metadata.type == 'datetime' %}                
+                <div class="profile-info-value">                    
+                    {% set dateField = 'entity.' ~ field|replace({'_': ''}) %}
+                    <span> {{'{{'}} {{ dateField }} != '' ? {{ dateField }}|date('d/m/Y h:i:s') : '' {{'}}'}} </span>
+                </div>
+            {%- elseif metadata.type == 'time' %}                
+                <div class="profile-info-value">                    
+                    {% set dateField = 'entity.' ~ field|replace({'_': ''}) %}
+                    <span> {{'{{'}} {{ dateField }} != '' ? {{ dateField }}|date('h:i:s') : '' {{'}}'}} </span>
+                </div>
+            {%- elseif metadata.type == 'boolean' %}                
+                <div class="profile-info-value">
+                    <span>{{ '{% if entity.' ~ field ~ ' == 1 %} Sim {% else %} Não {% endif %}' }}</span>
+                </div>
+            {%- else %}
+                <div class="profile-info-value">
+                    <span>{{ '{{ entity.' ~ field|replace({'_': ''}) ~ ' }}' }}</span>
+                </div>
+            {%- endif %}
+
+            </div>
+
+        {%- endfor %}
+
+    </div>
+        
+    <div class="hr dotted"></div>
+
+    {% set hide_edit, hide_delete = false, false %}
+    {% include 'crud/views/others/record_actions.html.twig.twig' %}
+{{ "{% endblock %}" }}
+{% endblock body %}
+
+{% block javascripts %}
+{{ "{% block javascripts %}" }}
+    {{ "{{ parent() }}" }}
+    {{ "<script src='{{asset('bundles/nutrirbox/dist/js/config/deletar.js')}}'></script>"}}
+{{ "{% endblock %}" }}
+{% endblock %} 

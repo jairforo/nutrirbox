@@ -1,0 +1,44 @@
+
+    /**
+{% block phpdoc_method_header %}
+     * Displays a form to create a new {{ entity }} entity.
+{% endblock phpdoc_method_header %}
+     *
+{% block phpdoc_method_annotations %}
+{% if 'annotation' == format %}
+     * @Route("/new", name="{{ route_name_prefix }}_new")
+     * @Method("GET")
+     * @Template()
+     * @Security("has_role('ROLE_ADMIN')")
+{% endif %}
+{% endblock phpdoc_method_annotations %}
+     */
+{% block method_definition %}
+    public function newAction()
+{% endblock method_definition %}
+    {
+{% block method_body %}
+        #BreadCrumbs
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Dashboard", $this->get("router")->generate("admin_dashboard"));
+        $breadcrumbs->addItem("{{ entity }}", $this->get("router")->generate("admin_{{ entity|lower }}"));
+        $breadcrumbs->addItem("Novo");
+        
+        $entity = new {{ entity_class }}();
+        $form   = $this->createCreateForm($entity);
+{% endblock method_body %}
+
+{% block method_return %}
+{% if 'annotation' == format %}
+        return array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        );
+{% else %}
+        return $this->render('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
+{% endif %}
+{% endblock method_return %}
+    }

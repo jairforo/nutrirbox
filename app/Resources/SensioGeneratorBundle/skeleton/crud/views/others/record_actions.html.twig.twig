@@ -1,0 +1,19 @@
+<p>
+    <a href="{{ "{{ path('" ~ route_name_prefix ~ "') }}" }}" class="btn">
+        <i class="ace-icon fa fa-arrow-left bigger-120"></i>
+        Listar
+    </a>
+    {% if ('edit' in actions) and (not hide_edit) %}
+        <a href="{{ "{{ path('" ~ route_name_prefix ~ "_edit', { 'id': entity."~ identifier ~" }) }}" }}" class="btn">
+            <i class="ace-icon fa fa-pencil bigger-120"></i>
+            Editar
+        </a>
+    {% endif %}
+    {% if ('delete' in actions) and (not hide_delete) %}
+        <a href="#" class="btn btn-delete">
+            <i class="ace-icon fa fa-trash bigger-120"></i>
+            Deletar
+        </a>
+        {{ '{{ form\(delete_form) }}' }}
+    {% endif %}
+</p>

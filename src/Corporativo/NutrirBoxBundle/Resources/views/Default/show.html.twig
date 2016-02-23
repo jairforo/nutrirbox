@@ -1,0 +1,29 @@
+{% extends "ConcurseiroBundle::base.html.twig" %}
+{% block title 'header' %}
+{% block header 'Concurso' %}
+{% block subheader 'Concurso' %}
+
+{% block body -%}
+    <dl id="dt-list-1" class="dl-horizontal">
+    {% for cabecalho in cabecalho %}
+        {% set chave = cabecalho.chave %}
+        <dt>{{ cabecalho.valor }}</dt>
+        <dd>{{ attribute(entity, chave) }}</dd>
+    {% endfor %}
+    </dl>
+    
+
+    {#<ul class="record_actions">
+        <li>
+            <a href="{{ path('admin_concurso') }}">
+                Back to the list
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('admin_concurso_edit', { 'id': entity.coConcurso }) }}">
+                Edit
+            </a>
+        </li>
+        <li>{{ form(delete_form) }}</li>
+    </ul>#}
+{% endblock %}

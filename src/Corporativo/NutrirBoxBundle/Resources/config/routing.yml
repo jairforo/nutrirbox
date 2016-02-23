@@ -1,0 +1,10 @@
+NutrirBoxBundle_home:
+    path:     /
+    defaults: { _controller: NutrirBoxBundle:Default:home }
+
+pessoa_create:
+    path:     /auth/pessoa/create
+    defaults: { _controller: "NutrirBoxBundle:Pessoa:create" }
+    methods:  POST
+
+

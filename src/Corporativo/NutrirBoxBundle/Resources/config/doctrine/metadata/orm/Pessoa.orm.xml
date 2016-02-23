@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Pessoa" table="pessoa">
+    <unique-constraints>
+      <unique-constraint name="no_email_UNIQUE" columns="no_email"/>
+    </unique-constraints>
+    <id name="coPessoa" type="integer" column="co_pessoa"/>
+    <id name="coPerfil" type="integer" column="co_perfil"/>
+    <field name="noNome" type="string" column="no_nome" length="100" nullable="true"/>
+    <field name="noEmail" type="string" column="no_email" length="100" nullable="false"/>
+    <field name="noSenha" type="string" column="no_senha" length="32" nullable="false"/>
+    <field name="nuCpf" type="string" column="nu_cpf" length="11" nullable="true"/>
+    <field name="tpSexo" type="string" column="tp_sexo" length="1" nullable="true"/>
+    <field name="dtNascimento" type="date" column="dt_nascimento" nullable="true"/>
+    <field name="dtCadastro" type="datetime" column="dt_cadastro" nullable="true"/>
+    <field name="nuTelefone" type="string" column="nu_telefone" length="11" nullable="true"/>
+    <field name="nuCelular" type="string" column="nu_celular" length="11" nullable="false"/>
+    <field name="noSalt" type="string" column="no_salt" length="32" nullable="true"/>
+    <field name="isAtivo" type="boolean" column="is_ativo" nullable="false"/>
+  </entity>
+</doctrine-mapping>

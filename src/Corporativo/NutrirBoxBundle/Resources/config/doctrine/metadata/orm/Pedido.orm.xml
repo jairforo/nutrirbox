@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Pedido" table="pedido">
+    <unique-constraints>
+      <unique-constraint name="nu_referencia_UNIQUE" columns="nu_referencia"/>
+    </unique-constraints>
+    <id name="coPedido" type="integer" column="co_pedido"/>
+    <id name="coPessoa" type="integer" column="co_pessoa"/>
+    <id name="coTransacao" type="integer" column="co_transacao"/>
+    <field name="nuReferencia" type="string" column="nu_referencia" length="45" nullable="false"/>
+    <field name="dtCadastro" type="datetime" column="dt_cadastro" nullable="false"/>
+    <field name="isAtivo" type="boolean" column="is_ativo" nullable="false"/>
+  </entity>
+</doctrine-mapping>

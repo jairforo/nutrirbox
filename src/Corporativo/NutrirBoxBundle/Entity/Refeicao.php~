@@ -1,0 +1,62 @@
+<?php
+
+namespace Corporativo\NutrirBoxBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Refeicao
+ *
+ * @ORM\Table(name="refeicao")
+ * @ORM\Entity
+ */
+class Refeicao
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="co_refeicao", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $coRefeicao;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="co_pedido", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $coPedido;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="de_observacao", type="text", nullable=true)
+     */
+    private $deObservacao;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_entregue", type="boolean", nullable=false)
+     */
+    private $isEntregue;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dt_entrega", type="datetime", nullable=false)
+     */
+    private $dtEntrega;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_ativo", type="boolean", nullable=false)
+     */
+    private $isAtivo;
+
+
+}

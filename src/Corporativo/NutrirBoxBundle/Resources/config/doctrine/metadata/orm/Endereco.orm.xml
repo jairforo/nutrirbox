@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Endereco" table="endereco">
+    <id name="coEndereco" type="integer" column="co_endereco"/>
+    <id name="coPessoa" type="integer" column="co_pessoa"/>
+    <field name="noLogradouro" type="string" column="no_logradouro" length="150" nullable="false"/>
+    <field name="nuNumero" type="string" column="nu_numero" length="45" nullable="true"/>
+    <field name="noBairro" type="string" column="no_bairro" length="50" nullable="true"/>
+    <field name="nuCep" type="string" column="nu_cep" length="45" nullable="true"/>
+    <field name="noCidade" type="string" column="no_cidade" length="100" nullable="true"/>
+    <field name="isAtivo" type="boolean" column="is_ativo" nullable="true"/>
+  </entity>
+</doctrine-mapping>

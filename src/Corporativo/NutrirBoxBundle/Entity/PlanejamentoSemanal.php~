@@ -1,0 +1,50 @@
+<?php
+
+namespace Corporativo\ConcurseiroBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PlanejamentoSemanal
+ *
+ * @ORM\Table(name="planejamento_semanal", uniqueConstraints={@ORM\UniqueConstraint(name="idx_pk_planejamento_semanal", columns={"co_planejamento_semanal"})}, indexes={@ORM\Index(name="idx_fk_pessoa_planejamento_semanal", columns={"co_pessoa"})})
+ * @ORM\Entity
+ */
+class PlanejamentoSemanal
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="co_planejamento_semanal", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="planejamento_semanal_co_planejamento_semanal_seq", allocationSize=1, initialValue=1)
+     */
+    private $coPlanejamentoSemanal;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dt_cadastro", type="date", nullable=false)
+     */
+    private $dtCadastro;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_ativo", type="boolean", nullable=false)
+     */
+    private $isAtivo;
+
+    /**
+     * @var \Pessoa
+     *
+     * @ORM\ManyToOne(targetEntity="Pessoa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="co_pessoa", referencedColumnName="co_pessoa")
+     * })
+     */
+    private $coPessoa;
+
+
+}

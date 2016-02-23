@@ -1,0 +1,73 @@
+<div id="navbar" class="navbar navbar-default">
+    {% block navbar %} 
+        <script type="text/javascript">
+            try {
+                ace.settings.check('navbar', 'fixed');
+            } catch (e) {
+            }
+        </script>
+        <div class="navbar-container" id="navbar-container">
+            <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+                <span class="sr-only">Toggle sidebar</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-header pull-left">
+                <a href="{{ path('user_dashboard') }}" class="navbar-brand">
+                    <small>
+                        <i class="fa fa-pencil-square-o"></i>
+                        {{ app_name }} {{ app_slogan }}
+                    </small>
+                </a>
+            </div>
+            <div class="navbar-buttons navbar-header pull-right" role="navigation">
+                <ul class="nav ace-nav">
+{#                    {{ render(controller('NutrirBoxBundle:Default:widgetPlanejamento')) }}#}
+{#                    {{ render(controller('NutrirBoxBundle:Default:widgetAlerta')) }}#}
+                    {#{{ render(controller('NutrirBoxBundle:Default:widgetMensagem')) }}#}
+                    <li class="light-blue">
+                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+{#                            {% if (app.user.imFoto) %}#}
+{#                                <img alt="{{app.user.noNome}}" class="nav-user-photo" src="{{asset('uploads/avatar/')}}{{app.user.imFoto}}" />#}
+{#                            {% else  %}#}
+                                <img alt="{{app.user.noNome}}" class="nav-user-photo" src="{{asset('bundles/nutrirbox/dist/avatars/profile-pic.jpg')}}" />
+{#                            {% endif %}#}
+                            <span class="user-info">
+                                {% if (app.user.tpSexo == 'F')%}
+                                    <small>Bem vinda,</small>
+                                {% else %}
+                                    <small>Bem vindo,</small>
+                                {% endif %}
+                                {% set noPessoa = app.user.noNome|split(' ') %}
+                                {{ noPessoa[0] }} {{ noPessoa[noPessoa|length -1]}}
+                            </span>
+                            <i class="ace-icon fa fa-caret-down"></i>
+                        </a>
+                        <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                            <li>
+                                <a href="{{ path('user_perfil') }}">
+                                    <i class="ace-icon fa fa-user"></i>
+                                    Perfil
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="tourn-btn">
+                                    <i class="ace-icon fa fa-globe"></i>
+                                    Tour
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="{{ path('logout') }}">
+                                    <i class="ace-icon fa fa-power-off"></i>
+                                    Sair
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    {% endblock %}
+</div>

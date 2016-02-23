@@ -1,0 +1,40 @@
+<?php
+
+namespace Corporativo\ConcurseiroBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * StatusTransacao
+ *
+ * @ORM\Table(name="status_transacao", uniqueConstraints={@ORM\UniqueConstraint(name="idx_pk_status_transacao", columns={"co_status_transacao"})})
+ * @ORM\Entity
+ */
+class StatusTransacao
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="co_status_transacao", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="status_transacao_co_status_transacao_seq", allocationSize=1, initialValue=1)
+     */
+    private $coStatusTransacao;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="no_nome", type="string", length=300, nullable=false)
+     */
+    private $noNome;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="de_descricao", type="text", nullable=false)
+     */
+    private $deDescricao;
+
+
+}

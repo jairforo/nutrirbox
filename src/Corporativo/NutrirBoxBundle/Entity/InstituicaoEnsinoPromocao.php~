@@ -1,0 +1,46 @@
+<?php
+
+namespace Corporativo\ConcurseiroBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * InstituicaoEnsinoPromocao
+ *
+ * @ORM\Table(name="instituicao_ensino_promocao", indexes={@ORM\Index(name="idx_fk_promocao_instituicao_ensino_promocao", columns={"co_promocao"}), @ORM\Index(name="idx_fk_instituicao_ensino_inst_ensino_promocao", columns={"co_instituicao_ensino"})})
+ * @ORM\Entity
+ */
+class InstituicaoEnsinoPromocao
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="co_instituicao_ensino_promocao", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="instituicao_ensino_promocao_co_instituicao_ensino_promocao_seq", allocationSize=1, initialValue=1)
+     */
+    private $coInstituicaoEnsinoPromocao;
+
+    /**
+     * @var \InstituicaoEnsino
+     *
+     * @ORM\ManyToOne(targetEntity="InstituicaoEnsino")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="co_instituicao_ensino", referencedColumnName="co_instituicao_ensino")
+     * })
+     */
+    private $coInstituicaoEnsino;
+
+    /**
+     * @var \Promocao
+     *
+     * @ORM\ManyToOne(targetEntity="Promocao")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="co_promocao", referencedColumnName="co_promocao")
+     * })
+     */
+    private $coPromocao;
+
+
+}

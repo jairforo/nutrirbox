@@ -1,0 +1,56 @@
+<?php
+
+namespace Corporativo\ConcurseiroBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * PessoaConcurso
+ *
+ * @ORM\Table(name="pessoa_concurso", uniqueConstraints={@ORM\UniqueConstraint(name="idx_pk_pessoa_concurso", columns={"co_pessoa_concurso"})}, indexes={@ORM\Index(name="idx_fk_pessoa_pessoa_concurso", columns={"co_pessoa"}), @ORM\Index(name="idx_fk_cargo_pessoa_concurso", columns={"co_cargo"}), @ORM\Index(name="idx_fk_transacao_pessoa_concurso", columns={"co_transacao"})})
+ * @ORM\Entity
+ */
+class PessoaConcurso
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="co_pessoa_concurso", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="pessoa_concurso_co_pessoa_concurso_seq", allocationSize=1, initialValue=1)
+     */
+    private $coPessoaConcurso;
+
+    /**
+     * @var \Cargo
+     *
+     * @ORM\ManyToOne(targetEntity="Cargo")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="co_cargo", referencedColumnName="co_cargo")
+     * })
+     */
+    private $coCargo;
+
+    /**
+     * @var \Pessoa
+     *
+     * @ORM\ManyToOne(targetEntity="Pessoa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="co_pessoa", referencedColumnName="co_pessoa")
+     * })
+     */
+    private $coPessoa;
+
+    /**
+     * @var \Transacao
+     *
+     * @ORM\ManyToOne(targetEntity="Transacao")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="co_transacao", referencedColumnName="co_transacao")
+     * })
+     */
+    private $coTransacao;
+
+
+}

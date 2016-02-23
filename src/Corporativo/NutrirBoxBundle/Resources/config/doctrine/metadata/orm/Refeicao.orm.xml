@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Refeicao" table="refeicao">
+    <id name="coRefeicao" type="integer" column="co_refeicao"/>
+    <id name="coPedido" type="integer" column="co_pedido"/>
+    <field name="deObservacao" type="text" column="de_observacao" nullable="true"/>
+    <field name="isEntregue" type="boolean" column="is_entregue" nullable="false"/>
+    <field name="dtEntrega" type="datetime" column="dt_entrega" nullable="false"/>
+    <field name="isAtivo" type="boolean" column="is_ativo" nullable="false"/>
+  </entity>
+</doctrine-mapping>

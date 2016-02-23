@@ -1,0 +1,72 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Pessoa</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Copessoa</th>
+                <td>{{ entity.coPessoa }}</td>
+            </tr>
+            <tr>
+                <th>Noemail</th>
+                <td>{{ entity.noEmail }}</td>
+            </tr>
+            <tr>
+                <th>Nosenha</th>
+                <td>{{ entity.noSenha }}</td>
+            </tr>
+            <tr>
+                <th>Nucpf</th>
+                <td>{{ entity.nuCpf }}</td>
+            </tr>
+            <tr>
+                <th>Nonome</th>
+                <td>{{ entity.noNome }}</td>
+            </tr>
+            <tr>
+                <th>Nosalt</th>
+                <td>{{ entity.noSalt }}</td>
+            </tr>
+            <tr>
+                <th>Dtnascimento</th>
+                <td>{{ entity.dtNascimento|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Dtcadastro</th>
+                <td>{{ entity.dtCadastro|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Nutelefone</th>
+                <td>{{ entity.nuTelefone }}</td>
+            </tr>
+            <tr>
+                <th>Nucelular</th>
+                <td>{{ entity.nuCelular }}</td>
+            </tr>
+            <tr>
+                <th>Imfoto</th>
+                <td>{{ entity.imFoto }}</td>
+            </tr>
+            <tr>
+                <th>Isativo</th>
+                <td>{{ entity.isAtivo }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('user_pessoa') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('user_pessoa_edit', { 'id': entity.coPessoa }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

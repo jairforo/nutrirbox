@@ -1,0 +1,83 @@
+<?php
+
+namespace Corporativo\ConcurseiroBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * DiaSemanaCompromisso
+ *
+ * @ORM\Table(name="dia_semana_compromisso", uniqueConstraints={@ORM\UniqueConstraint(name="idx_pk_dia_semana_compromisso", columns={"co_planejamento_semanal", "co_dia"})}, indexes={@ORM\Index(name="idx_fk_planejamento_semanal_dia_semana_compromisso", columns={"co_planejamento_semanal"})})
+ * @ORM\Entity
+ */
+class DiaSemanaCompromisso
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="co_dia", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $coDia;
+
+    /**
+     * @var \PlanejamentoSemanal
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="PlanejamentoSemanal")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="co_planejamento_semanal", referencedColumnName="co_planejamento_semanal")
+     * })
+     */
+    private $coPlanejamentoSemanal;
+
+
+
+    /**
+     * Set coDia
+     *
+     * @param integer $coDia
+     * @return DiaSemanaCompromisso
+     */
+    public function setCoDia($coDia)
+    {
+        $this->coDia = $coDia;
+
+        return $this;
+    }
+
+    /**
+     * Get coDia
+     *
+     * @return integer 
+     */
+    public function getCoDia()
+    {
+        return $this->coDia;
+    }
+
+    /**
+     * Set coPlanejamentoSemanal
+     *
+     * @param \Corporativo\ConcurseiroBundle\Entity\PlanejamentoSemanal $coPlanejamentoSemanal
+     * @return DiaSemanaCompromisso
+     */
+    public function setCoPlanejamentoSemanal(\Corporativo\ConcurseiroBundle\Entity\PlanejamentoSemanal $coPlanejamentoSemanal)
+    {
+        $this->coPlanejamentoSemanal = $coPlanejamentoSemanal;
+
+        return $this;
+    }
+
+    /**
+     * Get coPlanejamentoSemanal
+     *
+     * @return \Corporativo\ConcurseiroBundle\Entity\PlanejamentoSemanal 
+     */
+    public function getCoPlanejamentoSemanal()
+    {
+        return $this->coPlanejamentoSemanal;
+    }
+}
