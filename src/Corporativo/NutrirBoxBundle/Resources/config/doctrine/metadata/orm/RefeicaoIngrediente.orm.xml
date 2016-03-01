@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="RefeicaoIngrediente" table="refeicao_ingrediente">
-    <id name="coRefeicaoIngrediente" type="integer" column="co_refeicao_ingrediente"/>
-    <id name="coRefeicao" type="integer" column="co_refeicao"/>
-    <id name="coIngrediente" type="integer" column="co_ingrediente"/>
-    <field name="vlValor" type="float" column="vl_valor" precision="10" scale="0" nullable="false"/>
-  </entity>
-</doctrine-mapping>

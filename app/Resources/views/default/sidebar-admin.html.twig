@@ -1,68 +1,34 @@
+{% set route = app.request.attributes.get('_route') %}
 <div id="sidebar" class="sidebar responsive">
-    <script type="text/javascript">
-        try {
-            ace.settings.check('sidebar', 'fixed');
-        } catch (e) {
-        }
-    </script>
-    <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-        <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-            <button class="btn btn-success">
-                <i class="ace-icon fa fa-signal"></i>
-            </button>
-            <button class="btn btn-info">
-                <i class="ace-icon fa fa-pencil"></i>
-            </button>
-            <button class="btn btn-warning">
-                <i class="ace-icon fa fa-users"></i>
-            </button>
-            <button class="btn btn-danger">
-                <i class="ace-icon fa fa-cogs"></i>
-            </button>
-        </div>
-        <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-            <span class="btn btn-success"></span>
-            <span class="btn btn-info"></span>
-            <span class="btn btn-warning"></span>
-            <span class="btn btn-danger"></span>
-        </div>
-    </div>
     <ul class="nav nav-list">
         <li class="">
-            <a href="{{ path('admin_dashboard') }}">
-                <i class="menu-icon fa fa-tachometer"></i>
-                <span class="menu-text"> Dashboard </span>
-            </a>
-            <b class="arrow"></b>
-        </li>
-        <li class="">
             <a href="#" class="dropdown-toggle">
-                <i class="menu-icon fa fa-user"></i>
+                <i class="menu-icon fa fa-cutlery"></i>
                 <span class="menu-text">
-                    Perfil
+                    Pedidos
                 </span>
                 <b class="arrow fa fa-angle-down"></b>
             </a>
             <b class="arrow"></b>
             <ul class="submenu">
                 <li class="">
-                    <a href="{{ path('admin_perfil')}}">
+                    <a href="">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Lista
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li class="">
-                    <a href="{{ path('admin_perfil_new')}}">
+                    <a href="">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        Novo
+                        Adicionar
                     </a>
                     <b class="arrow"></b>
                 </li>
             </ul>
         </li>
-        <li class="">
-            <a href="#" class="dropdown-toggle">
+        <li class="{% if app.request.attributes.get('_route') starts with 'admin_pessoa' %}active{% endif %}">
+            <a href="{{ path('admin_pessoa') }}" class="dropdown-toggle">
                 <i class="menu-icon fa fa-users"></i>
                 <span class="menu-text">
                     Clientes
@@ -71,101 +37,59 @@
             </a>
             <b class="arrow"></b>
             <ul class="submenu">
-                <li class="">
-                    <a href="{{ path('admin_pessoa')}}">
+                <li class="{% if app.request.attributes.get('_route') starts with 'admin_pessoa' %}active{% endif %}">
+                    <a href="">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Lista
                     </a>
                     <b class="arrow"></b>
                 </li>
-                <li class="">
-                    <a href="{{ path('admin_pessoa_new')}}">
+                <li class="{% if app.request.attributes.get('_route') starts with 'admin_pessoa' %}active{% endif %}">
+                    <a href="">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        Novo
+                        Adicionar
                     </a>
                     <b class="arrow"></b>
                 </li>
             </ul>
         </li>
-        <li class="">
+        <li class="{% if route starts with 'admin_categoria' or 
+                            route starts with 'admin_prato' or 
+                            route starts with 'admin_perfil' %}active{% endif %}">
             <a href="#" class="dropdown-toggle">
-                <i class="menu-icon fa fa-money"></i>
+                <i class="menu-icon fa fa-gears"></i>
                 <span class="menu-text">
-                    Tipos de Ingredientes
+                    Dados Auxiliares
                 </span>
                 <b class="arrow fa fa-angle-down"></b>
             </a>
             <b class="arrow"></b>
             <ul class="submenu">
-                <li class="">
-                    <a href="{{ path('admin_tipoingrediente')}}">
+                <li class="{% if app.request.attributes.get('_route') starts with 'admin_categoria' %}active{% endif %}">
+                    <a href="{{ path('admin_categoria') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        Lista
+                        Categoria
                     </a>
                     <b class="arrow"></b>
                 </li>
-                <li class="">
-                    <a href="{{ path('admin_tipoingrediente_new')}}">
+                <li class="{% if app.request.attributes.get('_route') starts with 'admin_prato' %}active{% endif %}">
+                    <a href="{{ path('admin_prato') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        Novo
+                        Pratos
                     </a>
                     <b class="arrow"></b>
                 </li>
-            </ul>
-        </li>
-        <li class="">
-            <a href="#" class="dropdown-toggle">
-                <i class="menu-icon fa fa-money"></i>
-                <span class="menu-text">
-                    Ingredientes
-                </span>
-                <b class="arrow fa fa-angle-down"></b>
-            </a>
-            <b class="arrow"></b>
-            <ul class="submenu">
-                <li class="">
-                    <a href="{{ path('admin_ingrediente')}}">
+                <li class="{% if app.request.attributes.get('_route') starts with 'admin_perfil' %}active{% endif %}">
+                    <a href="{{ path('admin_perfil') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        Lista
-                    </a>
-                    <b class="arrow"></b>
-                </li>
-                <li class="">
-                    <a href="{{ path('admin_ingrediente_new')}}">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        Novo
+                        Perfil
                     </a>
                     <b class="arrow"></b>
                 </li>
             </ul>
         </li>
-        <li class="">
-            <a href="#" class="dropdown-toggle">
-                <i class="menu-icon fa fa-money"></i>
-                <span class="menu-text">
-                    Pedido
-                </span>
-                <b class="arrow fa fa-angle-down"></b>
-            </a>
-            <b class="arrow"></b>
-            <ul class="submenu">
-                <li class="">
-                    <a href="{{ path('admin_pedido')}}">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        Lista
-                    </a>
-                    <b class="arrow"></b>
-                </li>
-                <li class="">
-                    <a href="{{ path('admin_pedido_new')}}">
-                        <i class="menu-icon fa fa-caret-right"></i>
-                        Novo
-                    </a>
-                    <b class="arrow"></b>
-                </li>
-            </ul>
-        </li>
-    </ul><!-- /.nav-list -->
+    </ul>
+    <!-- /.nav-list -->
 
     <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
         <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
@@ -173,6 +97,7 @@
 
     <script type="text/javascript">
         try {
+            ace.settings.check('sidebar', 'fixed');
             ace.settings.check('sidebar', 'collapsed');
         } catch (e) {
         }

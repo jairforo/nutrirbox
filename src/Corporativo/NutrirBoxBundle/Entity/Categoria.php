@@ -5,21 +5,21 @@ namespace Corporativo\NutrirBoxBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Perfil
+ * Categoria
  *
- * @ORM\Table(name="perfil")
+ * @ORM\Table(name="categoria")
  * @ORM\Entity
  */
-class Perfil
+class Categoria
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="co_perfil", type="integer", nullable=false)
+     * @ORM\Column(name="co_categoria", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $coPerfil;
+    private $coCategoria;
 
     /**
      * @var string
@@ -28,30 +28,23 @@ class Perfil
      */
     private $noNome;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_ativo", type="boolean", nullable=false)
-     */
-    private $isAtivo;
-
 
 
     /**
-     * Get coPerfil
+     * Get coCategoria
      *
      * @return integer 
      */
-    public function getCoPerfil()
+    public function getCoCategoria()
     {
-        return $this->coPerfil;
+        return $this->coCategoria;
     }
 
     /**
      * Set noNome
      *
      * @param string $noNome
-     * @return Perfil
+     * @return Categoria
      */
     public function setNoNome($noNome)
     {
@@ -68,28 +61,5 @@ class Perfil
     public function getNoNome()
     {
         return $this->noNome;
-    }
-
-    /**
-     * Set isAtivo
-     *
-     * @param boolean $isAtivo
-     * @return Perfil
-     */
-    public function setIsAtivo($isAtivo)
-    {
-        $this->isAtivo = $isAtivo;
-
-        return $this;
-    }
-
-    /**
-     * Get isAtivo
-     *
-     * @return boolean 
-     */
-    public function getIsAtivo()
-    {
-        return $this->isAtivo;
     }
 }

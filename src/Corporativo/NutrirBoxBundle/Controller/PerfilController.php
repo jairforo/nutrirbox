@@ -16,7 +16,8 @@ use Corporativo\NutrirBoxBundle\Form\PerfilType;
  *
  * @Route("/admin/perfil")
  */
-class PerfilController extends Controller {
+class PerfilController extends Controller
+{
 
     /**
      * Lists all Perfil entities.
@@ -26,16 +27,21 @@ class PerfilController extends Controller {
      * @Template()
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function indexAction() {
+    public function indexAction()
+    {
         #BreadCrumbs
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Dashboard", $this->get("router")->generate("admin_dashboard"));
         $breadcrumbs->addItem("Perfil");
-
+    
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('NutrirBoxBundle:Perfil')->findBy(array('isAtivo' => true));
-
+        
+        if ( property_exists(new Perfil, 'isAtivo')) {
+            $entities = $em->getRepository('NutrirBoxBundle:Perfil')->findBy(array('isAtivo' => 'true'));
+        } else {
+            $entities = $em->getRepository('NutrirBoxBundle:Perfil')->findAll();
+        }
+        
         $deleteForm = $this->createDeleteForm(0);
 
         return array(
@@ -43,7 +49,6 @@ class PerfilController extends Controller {
             'delete_form' => $deleteForm->createView()
         );
     }
-
     /**
      * Creates a new Perfil entity.
      *
@@ -52,7 +57,8 @@ class PerfilController extends Controller {
      * @Template("NutrirBoxBundle:Perfil:new.html.twig")
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function createAction(Request $request) {
+    public function createAction(Request $request)
+    {
         $entity = new Perfil();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
@@ -68,7 +74,7 @@ class PerfilController extends Controller {
 
         return array(
             'entity' => $entity,
-            'form' => $form->createView(),
+            'form'   => $form->createView(),
         );
     }
 
@@ -79,7 +85,8 @@ class PerfilController extends Controller {
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Perfil $entity) {
+    private function createCreateForm(Perfil $entity)
+    {
         $form = $this->createForm(new PerfilType(), $entity, array(
             'action' => $this->generateUrl('admin_perfil_create'),
             'method' => 'POST',
@@ -98,19 +105,20 @@ class PerfilController extends Controller {
      * @Template()
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function newAction() {
+    public function newAction()
+    {
         #BreadCrumbs
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Dashboard", $this->get("router")->generate("admin_dashboard"));
         $breadcrumbs->addItem("Perfil", $this->get("router")->generate("admin_perfil"));
         $breadcrumbs->addItem("Novo");
-
+        
         $entity = new Perfil();
-        $form = $this->createCreateForm($entity);
+        $form   = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
-            'form' => $form->createView(),
+            'form'   => $form->createView(),
         );
     }
 
@@ -122,13 +130,14 @@ class PerfilController extends Controller {
      * @Template()
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function showAction($id) {
+    public function showAction($id)
+    {
         #BreadCrumbs
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Dashboard", $this->get("router")->generate("admin_dashboard"));
         $breadcrumbs->addItem("Perfil", $this->get("router")->generate("admin_perfil"));
         $breadcrumbs->addItem("Detalhe");
-
+    
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('NutrirBoxBundle:Perfil')->find($id);
@@ -140,7 +149,7 @@ class PerfilController extends Controller {
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity' => $entity,
+            'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -153,13 +162,14 @@ class PerfilController extends Controller {
      * @Template()
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function editAction($id) {
+    public function editAction($id)
+    {
         #BreadCrumbs
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Dashboard", $this->get("router")->generate("admin_dashboard"));
         $breadcrumbs->addItem("Perfil", $this->get("router")->generate("admin_perfil"));
         $breadcrumbs->addItem("Editar");
-
+        
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('NutrirBoxBundle:Perfil')->find($id);
@@ -172,20 +182,21 @@ class PerfilController extends Controller {
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity' => $entity,
-            'edit_form' => $editForm->createView(),
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
 
     /**
-     * Creates a form to edit a Perfil entity.
-     *
-     * @param Perfil $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createEditForm(Perfil $entity) {
+    * Creates a form to edit a Perfil entity.
+    *
+    * @param Perfil $entity The entity
+    *
+    * @return \Symfony\Component\Form\Form The form
+    */
+    private function createEditForm(Perfil $entity)
+    {
         $form = $this->createForm(new PerfilType(), $entity, array(
             'action' => $this->generateUrl('admin_perfil_update', array('id' => $entity->getCoPerfil())),
             'method' => 'PUT',
@@ -195,7 +206,6 @@ class PerfilController extends Controller {
 
         return $form;
     }
-
     /**
      * Edits an existing Perfil entity.
      *
@@ -204,7 +214,8 @@ class PerfilController extends Controller {
      * @Template("NutrirBoxBundle:Perfil:edit.html.twig")
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function updateAction(Request $request, $id) {
+    public function updateAction(Request $request, $id)
+    {
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('NutrirBoxBundle:Perfil')->find($id);
@@ -224,12 +235,11 @@ class PerfilController extends Controller {
         }
 
         return array(
-            'entity' => $entity,
-            'edit_form' => $editForm->createView(),
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
-
     /**
      * Deletes a Perfil entity.
      *
@@ -237,7 +247,8 @@ class PerfilController extends Controller {
      * @Method("DELETE")
      * @Security("has_role('ROLE_ADMIN')")
      */
-    public function deleteAction(Request $request, $id) {
+    public function deleteAction(Request $request, $id)
+    {
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
@@ -248,13 +259,13 @@ class PerfilController extends Controller {
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Perfil entity.');
             }
-
-            if (property_exists($entity, 'isAtivo')) {
+            
+            if ( property_exists($entity,'isAtivo')){
                 $entity->setIsAtivo(false);
             } else {
                 $em->remove($entity);
             }
-
+            
             $em->flush();
             $this->addFlash('success', 'Deletado com sucesso');
         }
@@ -269,14 +280,15 @@ class PerfilController extends Controller {
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id) {
+    private function createDeleteForm($id)
+    {
         return $this->createFormBuilder()
-                        ->setAction($this->generateUrl('admin_perfil_delete', array('id' => $id)))
-                        ->setMethod('DELETE')
-                        ->add('submit', 'submit', array('label' => 'Deletar',
-                            'attr' => array('class' => 'btn-delete-hidden hidden')))
-                        ->getForm()
+            ->setAction($this->generateUrl('admin_perfil_delete', array('id' => $id)))
+            ->setMethod('DELETE')
+            ->add('submit', 'submit', 
+                    array('label' => 'Deletar',
+                          'attr' => array('class' => 'btn-delete-hidden hidden')))
+            ->getForm()
         ;
     }
-
 }

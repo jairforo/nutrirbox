@@ -7,39 +7,19 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Pedido
  *
- * @ORM\Table(name="pedido", uniqueConstraints={@ORM\UniqueConstraint(name="nu_referencia_UNIQUE", columns={"nu_referencia"})})
+ * @ORM\Table(name="pedido", uniqueConstraints={@ORM\UniqueConstraint(name="nu_referencia_UNIQUE", columns={"nu_referencia"})}, indexes={@ORM\Index(name="fk_pedido_transacao1_idx", columns={"co_transacao"}), @ORM\Index(name="fk_pedido_pessoa1_idx", columns={"co_pessoa"})})
  * @ORM\Entity
  */
-class Pedido {
-
+class Pedido
+{
     /**
      * @var integer
      *
      * @ORM\Column(name="co_pedido", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $coPedido;
-
-    /**
-     * @var \Pessoa
-     *
-     * @ORM\ManyToOne(targetEntity="Pessoa")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="co_pessoa", referencedColumnName="co_pessoa")
-     * })
-     */
-    private $coPessoa;
-
-    /**
-     * @var \Transacao
-     *
-     * @ORM\ManyToOne(targetEntity="Transacao")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="co_transacao", referencedColumnName="co_transacao")
-     * })
-     */
-    private $coTransacao;
 
     /**
      * @var string
@@ -63,60 +43,35 @@ class Pedido {
     private $isAtivo;
 
     /**
-     * Set coPedido
+     * @var \Pessoa
      *
-     * @param integer $coPedido
-     * @return Pedido
+     * @ORM\ManyToOne(targetEntity="Pessoa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="co_pessoa", referencedColumnName="co_pessoa")
+     * })
      */
-    public function setCoPedido($coPedido) {
-        $this->coPedido = $coPedido;
+    private $coPessoa;
 
-        return $this;
-    }
+    /**
+     * @var \Transacao
+     *
+     * @ORM\ManyToOne(targetEntity="Transacao")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="co_transacao", referencedColumnName="co_transacao")
+     * })
+     */
+    private $coTransacao;
+
+
 
     /**
      * Get coPedido
      *
      * @return integer 
      */
-    public function getCoPedido() {
+    public function getCoPedido()
+    {
         return $this->coPedido;
-    }
-
-    /**
-     * 
-     * @param \Pessoa $coPessoa
-     * @return \Corporativo\NutrirBoxBundle\Entity\Pedido
-     */
-    function setCoPessoa(\Pessoa $coPessoa) {
-        $this->coPessoa = $coPessoa;
-        return $this;
-    }
-
-    /**
-     * 
-     * @return type
-     */
-    function getCoPessoa() {
-        return $this->coPessoa;
-    }
-
-    /**
-     * 
-     * @param \Transacao $coTransacao
-     * @return \Corporativo\NutrirBoxBundle\Entity\Pedido
-     */
-    function setCoTransacao(\Transacao $coTransacao) {
-        $this->coTransacao = $coTransacao;
-        return $this;
-    }
-
-    /**
-     * 
-     * @return type
-     */
-    function getCoTransacao() {
-        return $this->coTransacao;
     }
 
     /**
@@ -125,7 +80,8 @@ class Pedido {
      * @param string $nuReferencia
      * @return Pedido
      */
-    public function setNuReferencia($nuReferencia) {
+    public function setNuReferencia($nuReferencia)
+    {
         $this->nuReferencia = $nuReferencia;
 
         return $this;
@@ -136,7 +92,8 @@ class Pedido {
      *
      * @return string 
      */
-    public function getNuReferencia() {
+    public function getNuReferencia()
+    {
         return $this->nuReferencia;
     }
 
@@ -146,7 +103,8 @@ class Pedido {
      * @param \DateTime $dtCadastro
      * @return Pedido
      */
-    public function setDtCadastro($dtCadastro) {
+    public function setDtCadastro($dtCadastro)
+    {
         $this->dtCadastro = $dtCadastro;
 
         return $this;
@@ -157,7 +115,8 @@ class Pedido {
      *
      * @return \DateTime 
      */
-    public function getDtCadastro() {
+    public function getDtCadastro()
+    {
         return $this->dtCadastro;
     }
 
@@ -167,7 +126,8 @@ class Pedido {
      * @param boolean $isAtivo
      * @return Pedido
      */
-    public function setIsAtivo($isAtivo) {
+    public function setIsAtivo($isAtivo)
+    {
         $this->isAtivo = $isAtivo;
 
         return $this;
@@ -178,8 +138,54 @@ class Pedido {
      *
      * @return boolean 
      */
-    public function getIsAtivo() {
+    public function getIsAtivo()
+    {
         return $this->isAtivo;
     }
 
+    /**
+     * Set coPessoa
+     *
+     * @param \Corporativo\NutrirBoxBundle\Entity\Pessoa $coPessoa
+     * @return Pedido
+     */
+    public function setCoPessoa(\Corporativo\NutrirBoxBundle\Entity\Pessoa $coPessoa = null)
+    {
+        $this->coPessoa = $coPessoa;
+
+        return $this;
+    }
+
+    /**
+     * Get coPessoa
+     *
+     * @return \Corporativo\NutrirBoxBundle\Entity\Pessoa 
+     */
+    public function getCoPessoa()
+    {
+        return $this->coPessoa;
+    }
+
+    /**
+     * Set coTransacao
+     *
+     * @param \Corporativo\NutrirBoxBundle\Entity\Transacao $coTransacao
+     * @return Pedido
+     */
+    public function setCoTransacao(\Corporativo\NutrirBoxBundle\Entity\Transacao $coTransacao = null)
+    {
+        $this->coTransacao = $coTransacao;
+
+        return $this;
+    }
+
+    /**
+     * Get coTransacao
+     *
+     * @return \Corporativo\NutrirBoxBundle\Entity\Transacao 
+     */
+    public function getCoTransacao()
+    {
+        return $this->coTransacao;
+    }
 }

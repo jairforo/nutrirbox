@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Endereco
  *
- * @ORM\Table(name="endereco")
+ * @ORM\Table(name="endereco", indexes={@ORM\Index(name="fk_endereco_pessoa_idx", columns={"co_pessoa"})})
  * @ORM\Entity
  */
 class Endereco
@@ -17,19 +17,9 @@ class Endereco
      *
      * @ORM\Column(name="co_endereco", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $coEndereco;
-
-    /**
-     * @var \Pessoa
-     *
-     * @ORM\ManyToOne(targetEntity="Pessoa")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="co_pessoa", referencedColumnName="co_pessoa")
-     * })
-     */
-    private $coPessoa;
 
     /**
      * @var string
@@ -73,6 +63,18 @@ class Endereco
      */
     private $isAtivo;
 
+    /**
+     * @var \Pessoa
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\OneToOne(targetEntity="Pessoa")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="co_pessoa", referencedColumnName="co_pessoa")
+     * })
+     */
+    private $coPessoa;
+
 
 
     /**
@@ -96,24 +98,6 @@ class Endereco
     public function getCoEndereco()
     {
         return $this->coEndereco;
-    }
-    
-    /**
-     * Get Pessoa
-     * @return type
-     */
-    function getCoPessoa() {
-        return $this->coPessoa;
-    }
-
-    /**
-     * Set Pessoa
-     * @param \Pessoa $coPessoa
-     * @return \Corporativo\NutrirBoxBundle\Entity\Endereco
-     */
-    function setCoPessoa(\Pessoa $coPessoa) {
-        $this->coPessoa = $coPessoa;
-        return $this;
     }
 
     /**
@@ -252,5 +236,28 @@ class Endereco
     public function getIsAtivo()
     {
         return $this->isAtivo;
+    }
+
+    /**
+     * Set coPessoa
+     *
+     * @param \Corporativo\NutrirBoxBundle\Entity\Pessoa $coPessoa
+     * @return Endereco
+     */
+    public function setCoPessoa(\Corporativo\NutrirBoxBundle\Entity\Pessoa $coPessoa)
+    {
+        $this->coPessoa = $coPessoa;
+
+        return $this;
+    }
+
+    /**
+     * Get coPessoa
+     *
+     * @return \Corporativo\NutrirBoxBundle\Entity\Pessoa 
+     */
+    public function getCoPessoa()
+    {
+        return $this->coPessoa;
     }
 }

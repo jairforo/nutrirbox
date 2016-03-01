@@ -8,21 +8,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Corporativo\NutrirBoxBundle\Entity\Pedido;
-use Corporativo\NutrirBoxBundle\Form\PedidoType;
+use Corporativo\NutrirBoxBundle\Entity\Refeicao;
+use Corporativo\NutrirBoxBundle\Form\RefeicaoType;
 
 /**
- * Pedido controller.
+ * Refeicao controller.
  *
- * @Route("/admin/pedido")
+ * @Route("/admin/refeicao")
  */
-class PedidoController extends Controller
+class RefeicaoController extends Controller
 {
 
     /**
-     * Lists all Pedido entities.
+     * Lists all Refeicao entities.
      *
-     * @Route("/", name="admin_pedido")
+     * @Route("/", name="admin_refeicao")
      * @Method("GET")
      * @Template()
      * @Security("has_role('ROLE_ADMIN')")
@@ -32,14 +32,14 @@ class PedidoController extends Controller
         #BreadCrumbs
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Dashboard", $this->get("router")->generate("admin_dashboard"));
-        $breadcrumbs->addItem("Pedido");
+        $breadcrumbs->addItem("Refeicao");
     
         $em = $this->getDoctrine()->getManager();
         
-        if ( property_exists(new Pedido, 'isAtivo')) {
-            $entities = $em->getRepository('NutrirBoxBundle:Pedido')->findBy(array('isAtivo' => 'true'));
+        if ( property_exists(new Refeicao, 'isAtivo')) {
+            $entities = $em->getRepository('NutrirBoxBundle:Refeicao')->findBy(array('isAtivo' => 'true'));
         } else {
-            $entities = $em->getRepository('NutrirBoxBundle:Pedido')->findAll();
+            $entities = $em->getRepository('NutrirBoxBundle:Refeicao')->findAll();
         }
         
         $deleteForm = $this->createDeleteForm(0);
@@ -50,16 +50,16 @@ class PedidoController extends Controller
         );
     }
     /**
-     * Creates a new Pedido entity.
+     * Creates a new Refeicao entity.
      *
-     * @Route("/", name="admin_pedido_create")
+     * @Route("/", name="admin_refeicao_create")
      * @Method("POST")
-     * @Template("NutrirBoxBundle:Pedido:new.html.twig")
+     * @Template("NutrirBoxBundle:Refeicao:new.html.twig")
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function createAction(Request $request)
     {
-        $entity = new Pedido();
+        $entity = new Refeicao();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -69,7 +69,7 @@ class PedidoController extends Controller
             $em->flush();
 
             $this->addFlash('success', 'Adicionado com sucesso');
-            return $this->redirect($this->generateUrl('admin_pedido_show', array('id' => $entity->getCoPedido())));
+            return $this->redirect($this->generateUrl('admin_refeicao_show', array('id' => $entity->getCoRefeicao())));
         }
 
         return array(
@@ -79,16 +79,16 @@ class PedidoController extends Controller
     }
 
     /**
-     * Creates a form to create a Pedido entity.
+     * Creates a form to create a Refeicao entity.
      *
-     * @param Pedido $entity The entity
+     * @param Refeicao $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Pedido $entity)
+    private function createCreateForm(Refeicao $entity)
     {
-        $form = $this->createForm(new PedidoType(), $entity, array(
-            'action' => $this->generateUrl('admin_pedido_create'),
+        $form = $this->createForm(new RefeicaoType(), $entity, array(
+            'action' => $this->generateUrl('admin_refeicao_create'),
             'method' => 'POST',
         ));
 
@@ -98,9 +98,9 @@ class PedidoController extends Controller
     }
 
     /**
-     * Displays a form to create a new Pedido entity.
+     * Displays a form to create a new Refeicao entity.
      *
-     * @Route("/new", name="admin_pedido_new")
+     * @Route("/new", name="admin_refeicao_new")
      * @Method("GET")
      * @Template()
      * @Security("has_role('ROLE_ADMIN')")
@@ -110,10 +110,10 @@ class PedidoController extends Controller
         #BreadCrumbs
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Dashboard", $this->get("router")->generate("admin_dashboard"));
-        $breadcrumbs->addItem("Pedido", $this->get("router")->generate("admin_pedido"));
+        $breadcrumbs->addItem("Refeicao", $this->get("router")->generate("admin_refeicao"));
         $breadcrumbs->addItem("Novo");
         
-        $entity = new Pedido();
+        $entity = new Refeicao();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -123,9 +123,9 @@ class PedidoController extends Controller
     }
 
     /**
-     * Finds and displays a Pedido entity.
+     * Finds and displays a Refeicao entity.
      *
-     * @Route("/{id}", name="admin_pedido_show")
+     * @Route("/{id}", name="admin_refeicao_show")
      * @Method("GET")
      * @Template()
      * @Security("has_role('ROLE_ADMIN')")
@@ -135,15 +135,15 @@ class PedidoController extends Controller
         #BreadCrumbs
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Dashboard", $this->get("router")->generate("admin_dashboard"));
-        $breadcrumbs->addItem("Pedido", $this->get("router")->generate("admin_pedido"));
+        $breadcrumbs->addItem("Refeicao", $this->get("router")->generate("admin_refeicao"));
         $breadcrumbs->addItem("Detalhe");
     
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('NutrirBoxBundle:Pedido')->find($id);
+        $entity = $em->getRepository('NutrirBoxBundle:Refeicao')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Pedido entity.');
+            throw $this->createNotFoundException('Unable to find Refeicao entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -155,9 +155,9 @@ class PedidoController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Pedido entity.
+     * Displays a form to edit an existing Refeicao entity.
      *
-     * @Route("/{id}/edit", name="admin_pedido_edit")
+     * @Route("/{id}/edit", name="admin_refeicao_edit")
      * @Method("GET")
      * @Template()
      * @Security("has_role('ROLE_ADMIN')")
@@ -167,15 +167,15 @@ class PedidoController extends Controller
         #BreadCrumbs
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Dashboard", $this->get("router")->generate("admin_dashboard"));
-        $breadcrumbs->addItem("Pedido", $this->get("router")->generate("admin_pedido"));
+        $breadcrumbs->addItem("Refeicao", $this->get("router")->generate("admin_refeicao"));
         $breadcrumbs->addItem("Editar");
         
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('NutrirBoxBundle:Pedido')->find($id);
+        $entity = $em->getRepository('NutrirBoxBundle:Refeicao')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Pedido entity.');
+            throw $this->createNotFoundException('Unable to find Refeicao entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -189,16 +189,16 @@ class PedidoController extends Controller
     }
 
     /**
-    * Creates a form to edit a Pedido entity.
+    * Creates a form to edit a Refeicao entity.
     *
-    * @param Pedido $entity The entity
+    * @param Refeicao $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Pedido $entity)
+    private function createEditForm(Refeicao $entity)
     {
-        $form = $this->createForm(new PedidoType(), $entity, array(
-            'action' => $this->generateUrl('admin_pedido_update', array('id' => $entity->getCoPedido())),
+        $form = $this->createForm(new RefeicaoType(), $entity, array(
+            'action' => $this->generateUrl('admin_refeicao_update', array('id' => $entity->getCoRefeicao())),
             'method' => 'PUT',
         ));
 
@@ -207,21 +207,21 @@ class PedidoController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Pedido entity.
+     * Edits an existing Refeicao entity.
      *
-     * @Route("/{id}", name="admin_pedido_update")
+     * @Route("/{id}", name="admin_refeicao_update")
      * @Method("PUT")
-     * @Template("NutrirBoxBundle:Pedido:edit.html.twig")
+     * @Template("NutrirBoxBundle:Refeicao:edit.html.twig")
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('NutrirBoxBundle:Pedido')->find($id);
+        $entity = $em->getRepository('NutrirBoxBundle:Refeicao')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Pedido entity.');
+            throw $this->createNotFoundException('Unable to find Refeicao entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -231,7 +231,7 @@ class PedidoController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
             $this->addFlash('success', 'Editado com sucesso');
-            return $this->redirect($this->generateUrl('admin_pedido_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('admin_refeicao_edit', array('id' => $id)));
         }
 
         return array(
@@ -241,9 +241,9 @@ class PedidoController extends Controller
         );
     }
     /**
-     * Deletes a Pedido entity.
+     * Deletes a Refeicao entity.
      *
-     * @Route("/{id}", name="admin_pedido_delete")
+     * @Route("/{id}", name="admin_refeicao_delete")
      * @Method("DELETE")
      * @Security("has_role('ROLE_ADMIN')")
      */
@@ -254,10 +254,10 @@ class PedidoController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('NutrirBoxBundle:Pedido')->find($id);
+            $entity = $em->getRepository('NutrirBoxBundle:Refeicao')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Pedido entity.');
+                throw $this->createNotFoundException('Unable to find Refeicao entity.');
             }
             
             if ( property_exists($entity,'isAtivo')){
@@ -270,11 +270,11 @@ class PedidoController extends Controller
             $this->addFlash('success', 'Deletado com sucesso');
         }
 
-        return $this->redirect($this->generateUrl('admin_pedido'));
+        return $this->redirect($this->generateUrl('admin_refeicao'));
     }
 
     /**
-     * Creates a form to delete a Pedido entity by id.
+     * Creates a form to delete a Refeicao entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -283,7 +283,7 @@ class PedidoController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_pedido_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('admin_refeicao_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', 
                     array('label' => 'Deletar',

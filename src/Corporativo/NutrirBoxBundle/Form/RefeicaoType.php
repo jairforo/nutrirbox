@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class PerfilType extends AbstractType
+class RefeicaoType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,8 +15,12 @@ class PerfilType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('noNome')
+            ->add('isEntregue')
+            ->add('dtEntrega')
             ->add('isAtivo')
+            ->add('deObservacao')
+            ->add('coPedido')
+            ->add('pratoCoPrato')
         ;
     }
     
@@ -26,7 +30,7 @@ class PerfilType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Corporativo\NutrirBoxBundle\Entity\Perfil'
+            'data_class' => 'Corporativo\NutrirBoxBundle\Entity\Refeicao'
         ));
     }
 
@@ -35,6 +39,6 @@ class PerfilType extends AbstractType
      */
     public function getName()
     {
-        return 'corporativo_nutrirboxbundle_perfil';
+        return 'corporativo_nutrirboxbundle_refeicao';
     }
 }

@@ -7,36 +7,19 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Refeicao
  *
- * @ORM\Table(name="refeicao")
+ * @ORM\Table(name="refeicao", indexes={@ORM\Index(name="fk_refeicao_prato1_idx", columns={"prato_co_prato"}), @ORM\Index(name="fk_refeicao_pedido1_idx", columns={"co_pedido"})})
  * @ORM\Entity
  */
-class Refeicao {
-
+class Refeicao
+{
     /**
      * @var integer
      *
      * @ORM\Column(name="co_refeicao", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $coRefeicao;
-
-    /**
-     * @var \Pedido
-     *
-     * @ORM\ManyToOne(targetEntity="Pedido")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="co_pedido", referencedColumnName="co_pedido")
-     * })
-     */
-    private $coPedido;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="de_observacao", type="text", nullable=true)
-     */
-    private $deObservacao;
 
     /**
      * @var boolean
@@ -60,63 +43,42 @@ class Refeicao {
     private $isAtivo;
 
     /**
-     * Set coRefeicao
+     * @var string
      *
-     * @param integer $coRefeicao
-     * @return Refeicao
+     * @ORM\Column(name="de_observacao", type="text", nullable=true)
      */
-    public function setCoRefeicao($coRefeicao) {
-        $this->coRefeicao = $coRefeicao;
+    private $deObservacao;
 
-        return $this;
-    }
+    /**
+     * @var \Pedido
+     *
+     * @ORM\ManyToOne(targetEntity="Pedido")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="co_pedido", referencedColumnName="co_pedido")
+     * })
+     */
+    private $coPedido;
+
+    /**
+     * @var \Prato
+     *
+     * @ORM\ManyToOne(targetEntity="Prato")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="prato_co_prato", referencedColumnName="co_prato")
+     * })
+     */
+    private $pratoCoPrato;
+
+
 
     /**
      * Get coRefeicao
      *
      * @return integer 
      */
-    public function getCoRefeicao() {
+    public function getCoRefeicao()
+    {
         return $this->coRefeicao;
-    }
-
-    /**
-     * 
-     * @return type
-     */
-    function getCoPedido() {
-        return $this->coPedido;
-    }
-
-    /**
-     * 
-     * @param \Pedido $coPedido
-     * @return \Corporativo\NutrirBoxBundle\Entity\Refeicao
-     */
-    function setCoPedido(\Pedido $coPedido) {
-        $this->coPedido = $coPedido;
-        return $this;
-    }
-
-    /**
-     * Set deObservacao
-     *
-     * @param string $deObservacao
-     * @return Refeicao
-     */
-    public function setDeObservacao($deObservacao) {
-        $this->deObservacao = $deObservacao;
-
-        return $this;
-    }
-
-    /**
-     * Get deObservacao
-     *
-     * @return string 
-     */
-    public function getDeObservacao() {
-        return $this->deObservacao;
     }
 
     /**
@@ -125,7 +87,8 @@ class Refeicao {
      * @param boolean $isEntregue
      * @return Refeicao
      */
-    public function setIsEntregue($isEntregue) {
+    public function setIsEntregue($isEntregue)
+    {
         $this->isEntregue = $isEntregue;
 
         return $this;
@@ -136,7 +99,8 @@ class Refeicao {
      *
      * @return boolean 
      */
-    public function getIsEntregue() {
+    public function getIsEntregue()
+    {
         return $this->isEntregue;
     }
 
@@ -146,7 +110,8 @@ class Refeicao {
      * @param \DateTime $dtEntrega
      * @return Refeicao
      */
-    public function setDtEntrega($dtEntrega) {
+    public function setDtEntrega($dtEntrega)
+    {
         $this->dtEntrega = $dtEntrega;
 
         return $this;
@@ -157,7 +122,8 @@ class Refeicao {
      *
      * @return \DateTime 
      */
-    public function getDtEntrega() {
+    public function getDtEntrega()
+    {
         return $this->dtEntrega;
     }
 
@@ -167,7 +133,8 @@ class Refeicao {
      * @param boolean $isAtivo
      * @return Refeicao
      */
-    public function setIsAtivo($isAtivo) {
+    public function setIsAtivo($isAtivo)
+    {
         $this->isAtivo = $isAtivo;
 
         return $this;
@@ -178,8 +145,77 @@ class Refeicao {
      *
      * @return boolean 
      */
-    public function getIsAtivo() {
+    public function getIsAtivo()
+    {
         return $this->isAtivo;
     }
 
+    /**
+     * Set deObservacao
+     *
+     * @param string $deObservacao
+     * @return Refeicao
+     */
+    public function setDeObservacao($deObservacao)
+    {
+        $this->deObservacao = $deObservacao;
+
+        return $this;
+    }
+
+    /**
+     * Get deObservacao
+     *
+     * @return string 
+     */
+    public function getDeObservacao()
+    {
+        return $this->deObservacao;
+    }
+
+    /**
+     * Set coPedido
+     *
+     * @param \Corporativo\NutrirBoxBundle\Entity\Pedido $coPedido
+     * @return Refeicao
+     */
+    public function setCoPedido(\Corporativo\NutrirBoxBundle\Entity\Pedido $coPedido = null)
+    {
+        $this->coPedido = $coPedido;
+
+        return $this;
+    }
+
+    /**
+     * Get coPedido
+     *
+     * @return \Corporativo\NutrirBoxBundle\Entity\Pedido 
+     */
+    public function getCoPedido()
+    {
+        return $this->coPedido;
+    }
+
+    /**
+     * Set pratoCoPrato
+     *
+     * @param \Corporativo\NutrirBoxBundle\Entity\Prato $pratoCoPrato
+     * @return Refeicao
+     */
+    public function setPratoCoPrato(\Corporativo\NutrirBoxBundle\Entity\Prato $pratoCoPrato = null)
+    {
+        $this->pratoCoPrato = $pratoCoPrato;
+
+        return $this;
+    }
+
+    /**
+     * Get pratoCoPrato
+     *
+     * @return \Corporativo\NutrirBoxBundle\Entity\Prato 
+     */
+    public function getPratoCoPrato()
+    {
+        return $this->pratoCoPrato;
+    }
 }

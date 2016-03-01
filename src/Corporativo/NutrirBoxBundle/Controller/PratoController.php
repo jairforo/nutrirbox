@@ -8,21 +8,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Corporativo\NutrirBoxBundle\Entity\Pedido;
-use Corporativo\NutrirBoxBundle\Form\PedidoType;
+use Corporativo\NutrirBoxBundle\Entity\Prato;
+use Corporativo\NutrirBoxBundle\Form\PratoType;
 
 /**
- * Pedido controller.
+ * Prato controller.
  *
- * @Route("/admin/pedido")
+ * @Route("/admin/prato")
  */
-class PedidoController extends Controller
+class PratoController extends Controller
 {
 
     /**
-     * Lists all Pedido entities.
+     * Lists all Prato entities.
      *
-     * @Route("/", name="admin_pedido")
+     * @Route("/", name="admin_prato")
      * @Method("GET")
      * @Template()
      * @Security("has_role('ROLE_ADMIN')")
@@ -32,14 +32,14 @@ class PedidoController extends Controller
         #BreadCrumbs
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Dashboard", $this->get("router")->generate("admin_dashboard"));
-        $breadcrumbs->addItem("Pedido");
+        $breadcrumbs->addItem("Prato");
     
         $em = $this->getDoctrine()->getManager();
         
-        if ( property_exists(new Pedido, 'isAtivo')) {
-            $entities = $em->getRepository('NutrirBoxBundle:Pedido')->findBy(array('isAtivo' => 'true'));
+        if ( property_exists(new Prato, 'isAtivo')) {
+            $entities = $em->getRepository('NutrirBoxBundle:Prato')->findBy(array('isAtivo' => 'true'));
         } else {
-            $entities = $em->getRepository('NutrirBoxBundle:Pedido')->findAll();
+            $entities = $em->getRepository('NutrirBoxBundle:Prato')->findAll();
         }
         
         $deleteForm = $this->createDeleteForm(0);
@@ -50,16 +50,16 @@ class PedidoController extends Controller
         );
     }
     /**
-     * Creates a new Pedido entity.
+     * Creates a new Prato entity.
      *
-     * @Route("/", name="admin_pedido_create")
+     * @Route("/", name="admin_prato_create")
      * @Method("POST")
-     * @Template("NutrirBoxBundle:Pedido:new.html.twig")
+     * @Template("NutrirBoxBundle:Prato:new.html.twig")
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function createAction(Request $request)
     {
-        $entity = new Pedido();
+        $entity = new Prato();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -69,7 +69,7 @@ class PedidoController extends Controller
             $em->flush();
 
             $this->addFlash('success', 'Adicionado com sucesso');
-            return $this->redirect($this->generateUrl('admin_pedido_show', array('id' => $entity->getCoPedido())));
+            return $this->redirect($this->generateUrl('admin_prato_show', array('id' => $entity->getCoPrato())));
         }
 
         return array(
@@ -79,16 +79,16 @@ class PedidoController extends Controller
     }
 
     /**
-     * Creates a form to create a Pedido entity.
+     * Creates a form to create a Prato entity.
      *
-     * @param Pedido $entity The entity
+     * @param Prato $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Pedido $entity)
+    private function createCreateForm(Prato $entity)
     {
-        $form = $this->createForm(new PedidoType(), $entity, array(
-            'action' => $this->generateUrl('admin_pedido_create'),
+        $form = $this->createForm(new PratoType(), $entity, array(
+            'action' => $this->generateUrl('admin_prato_create'),
             'method' => 'POST',
         ));
 
@@ -98,9 +98,9 @@ class PedidoController extends Controller
     }
 
     /**
-     * Displays a form to create a new Pedido entity.
+     * Displays a form to create a new Prato entity.
      *
-     * @Route("/new", name="admin_pedido_new")
+     * @Route("/new", name="admin_prato_new")
      * @Method("GET")
      * @Template()
      * @Security("has_role('ROLE_ADMIN')")
@@ -110,10 +110,10 @@ class PedidoController extends Controller
         #BreadCrumbs
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Dashboard", $this->get("router")->generate("admin_dashboard"));
-        $breadcrumbs->addItem("Pedido", $this->get("router")->generate("admin_pedido"));
+        $breadcrumbs->addItem("Prato", $this->get("router")->generate("admin_prato"));
         $breadcrumbs->addItem("Novo");
         
-        $entity = new Pedido();
+        $entity = new Prato();
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -123,9 +123,9 @@ class PedidoController extends Controller
     }
 
     /**
-     * Finds and displays a Pedido entity.
+     * Finds and displays a Prato entity.
      *
-     * @Route("/{id}", name="admin_pedido_show")
+     * @Route("/{id}", name="admin_prato_show")
      * @Method("GET")
      * @Template()
      * @Security("has_role('ROLE_ADMIN')")
@@ -135,15 +135,15 @@ class PedidoController extends Controller
         #BreadCrumbs
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Dashboard", $this->get("router")->generate("admin_dashboard"));
-        $breadcrumbs->addItem("Pedido", $this->get("router")->generate("admin_pedido"));
+        $breadcrumbs->addItem("Prato", $this->get("router")->generate("admin_prato"));
         $breadcrumbs->addItem("Detalhe");
     
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('NutrirBoxBundle:Pedido')->find($id);
+        $entity = $em->getRepository('NutrirBoxBundle:Prato')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Pedido entity.');
+            throw $this->createNotFoundException('Unable to find Prato entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -155,9 +155,9 @@ class PedidoController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Pedido entity.
+     * Displays a form to edit an existing Prato entity.
      *
-     * @Route("/{id}/edit", name="admin_pedido_edit")
+     * @Route("/{id}/edit", name="admin_prato_edit")
      * @Method("GET")
      * @Template()
      * @Security("has_role('ROLE_ADMIN')")
@@ -167,15 +167,15 @@ class PedidoController extends Controller
         #BreadCrumbs
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         $breadcrumbs->addItem("Dashboard", $this->get("router")->generate("admin_dashboard"));
-        $breadcrumbs->addItem("Pedido", $this->get("router")->generate("admin_pedido"));
+        $breadcrumbs->addItem("Prato", $this->get("router")->generate("admin_prato"));
         $breadcrumbs->addItem("Editar");
         
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('NutrirBoxBundle:Pedido')->find($id);
+        $entity = $em->getRepository('NutrirBoxBundle:Prato')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Pedido entity.');
+            throw $this->createNotFoundException('Unable to find Prato entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -189,16 +189,16 @@ class PedidoController extends Controller
     }
 
     /**
-    * Creates a form to edit a Pedido entity.
+    * Creates a form to edit a Prato entity.
     *
-    * @param Pedido $entity The entity
+    * @param Prato $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Pedido $entity)
+    private function createEditForm(Prato $entity)
     {
-        $form = $this->createForm(new PedidoType(), $entity, array(
-            'action' => $this->generateUrl('admin_pedido_update', array('id' => $entity->getCoPedido())),
+        $form = $this->createForm(new PratoType(), $entity, array(
+            'action' => $this->generateUrl('admin_prato_update', array('id' => $entity->getCoPrato())),
             'method' => 'PUT',
         ));
 
@@ -207,21 +207,21 @@ class PedidoController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Pedido entity.
+     * Edits an existing Prato entity.
      *
-     * @Route("/{id}", name="admin_pedido_update")
+     * @Route("/{id}", name="admin_prato_update")
      * @Method("PUT")
-     * @Template("NutrirBoxBundle:Pedido:edit.html.twig")
+     * @Template("NutrirBoxBundle:Prato:edit.html.twig")
      * @Security("has_role('ROLE_ADMIN')")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('NutrirBoxBundle:Pedido')->find($id);
+        $entity = $em->getRepository('NutrirBoxBundle:Prato')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Pedido entity.');
+            throw $this->createNotFoundException('Unable to find Prato entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -231,7 +231,7 @@ class PedidoController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
             $this->addFlash('success', 'Editado com sucesso');
-            return $this->redirect($this->generateUrl('admin_pedido_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('admin_prato_edit', array('id' => $id)));
         }
 
         return array(
@@ -241,9 +241,9 @@ class PedidoController extends Controller
         );
     }
     /**
-     * Deletes a Pedido entity.
+     * Deletes a Prato entity.
      *
-     * @Route("/{id}", name="admin_pedido_delete")
+     * @Route("/{id}", name="admin_prato_delete")
      * @Method("DELETE")
      * @Security("has_role('ROLE_ADMIN')")
      */
@@ -254,10 +254,10 @@ class PedidoController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('NutrirBoxBundle:Pedido')->find($id);
+            $entity = $em->getRepository('NutrirBoxBundle:Prato')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Pedido entity.');
+                throw $this->createNotFoundException('Unable to find Prato entity.');
             }
             
             if ( property_exists($entity,'isAtivo')){
@@ -270,11 +270,11 @@ class PedidoController extends Controller
             $this->addFlash('success', 'Deletado com sucesso');
         }
 
-        return $this->redirect($this->generateUrl('admin_pedido'));
+        return $this->redirect($this->generateUrl('admin_prato'));
     }
 
     /**
-     * Creates a form to delete a Pedido entity by id.
+     * Creates a form to delete a Prato entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -283,7 +283,7 @@ class PedidoController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_pedido_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('admin_prato_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', 
                     array('label' => 'Deletar',

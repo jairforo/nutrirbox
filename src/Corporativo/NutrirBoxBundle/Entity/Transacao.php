@@ -17,7 +17,7 @@ class Transacao
      *
      * @ORM\Column(name="co_transacao", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $coTransacao;
 
@@ -29,18 +29,18 @@ class Transacao
     private $noNome;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="de_descricao", type="text", nullable=true)
-     */
-    private $deDescricao;
-
-    /**
      * @var boolean
      *
      * @ORM\Column(name="is_ativo", type="boolean", nullable=false)
      */
     private $isAtivo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="de_descricao", type="text", nullable=true)
+     */
+    private $deDescricao;
 
 
 
@@ -78,29 +78,6 @@ class Transacao
     }
 
     /**
-     * Set deDescricao
-     *
-     * @param string $deDescricao
-     * @return Transacao
-     */
-    public function setDeDescricao($deDescricao)
-    {
-        $this->deDescricao = $deDescricao;
-
-        return $this;
-    }
-
-    /**
-     * Get deDescricao
-     *
-     * @return string 
-     */
-    public function getDeDescricao()
-    {
-        return $this->deDescricao;
-    }
-
-    /**
      * Set isAtivo
      *
      * @param boolean $isAtivo
@@ -121,5 +98,28 @@ class Transacao
     public function getIsAtivo()
     {
         return $this->isAtivo;
+    }
+
+    /**
+     * Set deDescricao
+     *
+     * @param string $deDescricao
+     * @return Transacao
+     */
+    public function setDeDescricao($deDescricao)
+    {
+        $this->deDescricao = $deDescricao;
+
+        return $this;
+    }
+
+    /**
+     * Get deDescricao
+     *
+     * @return string 
+     */
+    public function getDeDescricao()
+    {
+        return $this->deDescricao;
     }
 }

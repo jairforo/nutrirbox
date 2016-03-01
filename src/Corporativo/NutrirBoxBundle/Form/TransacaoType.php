@@ -16,8 +16,8 @@ class TransacaoType extends AbstractType
     {
         $builder
             ->add('noNome')
-            ->add('deDescricao')
             ->add('isAtivo')
+            ->add('deDescricao')
         ;
     }
     

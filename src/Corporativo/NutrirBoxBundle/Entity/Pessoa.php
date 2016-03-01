@@ -8,29 +8,19 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 /**
  * Pessoa
  *
- * @ORM\Table(name="pessoa", uniqueConstraints={@ORM\UniqueConstraint(name="no_email_UNIQUE", columns={"no_email"})})
+ * @ORM\Table(name="pessoa", uniqueConstraints={@ORM\UniqueConstraint(name="no_email_UNIQUE", columns={"no_email"})}, indexes={@ORM\Index(name="fk_pessoa_perfil1_idx", columns={"co_perfil"})})
  * @ORM\Entity(repositoryClass="Corporativo\NutrirBoxBundle\Repository\PessoaRepository")
  */
-class Pessoa implements AdvancedUserInterface {
-
+class Pessoa implements AdvancedUserInterface
+{
     /**
      * @var integer
      *
      * @ORM\Column(name="co_pessoa", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $coPessoa;
-
-    /**
-     * @var \Perfil
-     *
-     * @ORM\ManyToOne(targetEntity="Perfil")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="co_perfil", referencedColumnName="co_perfil")
-     * })
-     */
-    private $coPerfil;
 
     /**
      * @var string
@@ -49,7 +39,7 @@ class Pessoa implements AdvancedUserInterface {
     /**
      * @var string
      *
-     * @ORM\Column(name="no_senha", type="string", length=32, nullable=false)
+     * @ORM\Column(name="no_senha", type="string", length=88, nullable=false)
      */
     private $noSenha;
 
@@ -103,6 +93,13 @@ class Pessoa implements AdvancedUserInterface {
     private $noSalt;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="im_foto", type="string", length=45, nullable=true)
+     */
+    private $imFoto;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="is_ativo", type="boolean", nullable=false)
@@ -110,44 +107,25 @@ class Pessoa implements AdvancedUserInterface {
     private $isAtivo;
 
     /**
-     * Set coPessoa
+     * @var \Perfil
      *
-     * @param integer $coPessoa
-     * @return Pessoa
+     * @ORM\ManyToOne(targetEntity="Perfil")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="co_perfil", referencedColumnName="co_perfil")
+     * })
      */
-    public function setCoPessoa($coPessoa) {
-        $this->coPessoa = $coPessoa;
+    private $coPerfil;
 
-        return $this;
-    }
+
 
     /**
      * Get coPessoa
      *
      * @return integer 
      */
-    public function getCoPessoa() {
+    public function getCoPessoa()
+    {
         return $this->coPessoa;
-    }
-
-    /**
-     * Set coPerfil
-     *
-     * @param \Corporativo\NutrirBoxBundle\Entity\Perfil $coPerfil
-     * @return Pessoa
-     */
-    public function setCoPerfil(\Corporativo\NutrirBoxBundle\Entity\Perfil $coPerfil = null) {
-        $this->coPerfil = $coPerfil;
-        return $this;
-    }
-
-    /**
-     * Get coPerfil
-     *
-     * @return \Corporativo\NutrirBoxBundle\Entity\Perfil 
-     */
-    public function getCoPerfil() {
-        return $this->coPerfil;
     }
 
     /**
@@ -156,7 +134,8 @@ class Pessoa implements AdvancedUserInterface {
      * @param string $noNome
      * @return Pessoa
      */
-    public function setNoNome($noNome) {
+    public function setNoNome($noNome)
+    {
         $this->noNome = $noNome;
 
         return $this;
@@ -167,7 +146,8 @@ class Pessoa implements AdvancedUserInterface {
      *
      * @return string 
      */
-    public function getNoNome() {
+    public function getNoNome()
+    {
         return $this->noNome;
     }
 
@@ -177,7 +157,8 @@ class Pessoa implements AdvancedUserInterface {
      * @param string $noEmail
      * @return Pessoa
      */
-    public function setNoEmail($noEmail) {
+    public function setNoEmail($noEmail)
+    {
         $this->noEmail = $noEmail;
 
         return $this;
@@ -188,7 +169,8 @@ class Pessoa implements AdvancedUserInterface {
      *
      * @return string 
      */
-    public function getNoEmail() {
+    public function getNoEmail()
+    {
         return $this->noEmail;
     }
 
@@ -198,7 +180,8 @@ class Pessoa implements AdvancedUserInterface {
      * @param string $noSenha
      * @return Pessoa
      */
-    public function setNoSenha($noSenha) {
+    public function setNoSenha($noSenha)
+    {
         $this->noSenha = $noSenha;
 
         return $this;
@@ -209,7 +192,8 @@ class Pessoa implements AdvancedUserInterface {
      *
      * @return string 
      */
-    public function getNoSenha() {
+    public function getNoSenha()
+    {
         return $this->noSenha;
     }
 
@@ -219,7 +203,8 @@ class Pessoa implements AdvancedUserInterface {
      * @param string $nuCpf
      * @return Pessoa
      */
-    public function setNuCpf($nuCpf) {
+    public function setNuCpf($nuCpf)
+    {
         $this->nuCpf = $nuCpf;
 
         return $this;
@@ -230,7 +215,8 @@ class Pessoa implements AdvancedUserInterface {
      *
      * @return string 
      */
-    public function getNuCpf() {
+    public function getNuCpf()
+    {
         return $this->nuCpf;
     }
 
@@ -240,7 +226,8 @@ class Pessoa implements AdvancedUserInterface {
      * @param string $tpSexo
      * @return Pessoa
      */
-    public function setTpSexo($tpSexo) {
+    public function setTpSexo($tpSexo)
+    {
         $this->tpSexo = $tpSexo;
 
         return $this;
@@ -251,7 +238,8 @@ class Pessoa implements AdvancedUserInterface {
      *
      * @return string 
      */
-    public function getTpSexo() {
+    public function getTpSexo()
+    {
         return $this->tpSexo;
     }
 
@@ -261,7 +249,8 @@ class Pessoa implements AdvancedUserInterface {
      * @param \DateTime $dtNascimento
      * @return Pessoa
      */
-    public function setDtNascimento($dtNascimento) {
+    public function setDtNascimento($dtNascimento)
+    {
         $this->dtNascimento = $dtNascimento;
 
         return $this;
@@ -272,7 +261,8 @@ class Pessoa implements AdvancedUserInterface {
      *
      * @return \DateTime 
      */
-    public function getDtNascimento() {
+    public function getDtNascimento()
+    {
         return $this->dtNascimento;
     }
 
@@ -282,7 +272,8 @@ class Pessoa implements AdvancedUserInterface {
      * @param \DateTime $dtCadastro
      * @return Pessoa
      */
-    public function setDtCadastro($dtCadastro) {
+    public function setDtCadastro($dtCadastro)
+    {
         $this->dtCadastro = $dtCadastro;
 
         return $this;
@@ -293,7 +284,8 @@ class Pessoa implements AdvancedUserInterface {
      *
      * @return \DateTime 
      */
-    public function getDtCadastro() {
+    public function getDtCadastro()
+    {
         return $this->dtCadastro;
     }
 
@@ -303,7 +295,8 @@ class Pessoa implements AdvancedUserInterface {
      * @param string $nuTelefone
      * @return Pessoa
      */
-    public function setNuTelefone($nuTelefone) {
+    public function setNuTelefone($nuTelefone)
+    {
         $this->nuTelefone = $nuTelefone;
 
         return $this;
@@ -314,7 +307,8 @@ class Pessoa implements AdvancedUserInterface {
      *
      * @return string 
      */
-    public function getNuTelefone() {
+    public function getNuTelefone()
+    {
         return $this->nuTelefone;
     }
 
@@ -324,7 +318,8 @@ class Pessoa implements AdvancedUserInterface {
      * @param string $nuCelular
      * @return Pessoa
      */
-    public function setNuCelular($nuCelular) {
+    public function setNuCelular($nuCelular)
+    {
         $this->nuCelular = $nuCelular;
 
         return $this;
@@ -335,7 +330,8 @@ class Pessoa implements AdvancedUserInterface {
      *
      * @return string 
      */
-    public function getNuCelular() {
+    public function getNuCelular()
+    {
         return $this->nuCelular;
     }
 
@@ -345,7 +341,8 @@ class Pessoa implements AdvancedUserInterface {
      * @param string $noSalt
      * @return Pessoa
      */
-    public function setNoSalt($noSalt) {
+    public function setNoSalt($noSalt)
+    {
         $this->noSalt = $noSalt;
 
         return $this;
@@ -356,8 +353,32 @@ class Pessoa implements AdvancedUserInterface {
      *
      * @return string 
      */
-    public function getNoSalt() {
+    public function getNoSalt()
+    {
         return $this->noSalt;
+    }
+
+    /**
+     * Set imFoto
+     *
+     * @param string $imFoto
+     * @return Pessoa
+     */
+    public function setImFoto($imFoto)
+    {
+        $this->imFoto = $imFoto;
+
+        return $this;
+    }
+
+    /**
+     * Get imFoto
+     *
+     * @return string 
+     */
+    public function getImFoto()
+    {
+        return $this->imFoto;
     }
 
     /**
@@ -366,7 +387,8 @@ class Pessoa implements AdvancedUserInterface {
      * @param boolean $isAtivo
      * @return Pessoa
      */
-    public function setIsAtivo($isAtivo) {
+    public function setIsAtivo($isAtivo)
+    {
         $this->isAtivo = $isAtivo;
 
         return $this;
@@ -377,12 +399,36 @@ class Pessoa implements AdvancedUserInterface {
      *
      * @return boolean 
      */
-    public function getIsAtivo() {
+    public function getIsAtivo()
+    {
         return $this->isAtivo;
     }
 
+    /**
+     * Set coPerfil
+     *
+     * @param \Corporativo\NutrirBoxBundle\Entity\Perfil $coPerfil
+     * @return Pessoa
+     */
+    public function setCoPerfil(\Corporativo\NutrirBoxBundle\Entity\Perfil $coPerfil = null)
+    {
+        $this->coPerfil = $coPerfil;
+
+        return $this;
+    }
+
+    /**
+     * Get coPerfil
+     *
+     * @return \Corporativo\NutrirBoxBundle\Entity\Perfil 
+     */
+    public function getCoPerfil()
+    {
+        return $this->coPerfil;
+    }
+
     public function eraseCredentials() {
-        
+
     }
 
     public function getPassword() {
@@ -420,5 +466,4 @@ class Pessoa implements AdvancedUserInterface {
     public function isEnabled() {
         return $this->isAtivo;
     }
-
 }

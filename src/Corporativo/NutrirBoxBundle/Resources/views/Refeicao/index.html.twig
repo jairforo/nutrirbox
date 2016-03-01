@@ -1,6 +1,6 @@
     {% extends 'NutrirBoxBundle::base.html.twig' %}
-    {% block title %} Pedido {% endblock %}
-    {% block header %} Pedido {% endblock %}
+    {% block title %} Refeicao {% endblock %}
+    {% block header %} Refeicao {% endblock %}
     {% block subheader %} Lista {% endblock %}
 
 {% block body -%}
@@ -20,7 +20,7 @@
                                             <input type="checkbox" class="ace" />
                                             <span class="lbl"></span>
                                         </label>
-                                    </th>                                        <th>Pedido</th>                                        <th>Referencia</th>                                        <th>Cadastro</th>                                        <th>Ativo</th>                                    <th>Ações</th>
+                                    </th>                                        <th>Refeicao</th>                                        <th>Entregue</th>                                        <th>Entrega</th>                                        <th>Ativo</th>                                        <th>Observacao</th>                                    <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -31,13 +31,13 @@
                                             <input type="checkbox" class="ace" />
                                             <span class="lbl"></span>
                                         </label>
-                                    </td>                                            <td><a href="{{ path('admin_pedido_show', { 'id': entity.coPedido }) }}">{{ entity.coPedido }}</a></td>                                            <td>{{ entity.nuReferencia }}</td>                                            <td>{% if entity.dtCadastro %}{{ entity.dtCadastro|date('d/m/Y H:i:s') }}{% endif %}</td>                                            <td>{% if entity.isAtivo == 1 %} <span class="label label-success arrowed-in">Sim</span> {% else %} <span class="label label-danger arrowed-in">Não</span> {% endif %}</td>                                            <td><div class="hidden-sm hidden-xs btn-group">            <a href="{{ path('admin_pedido_show', { 'id': entity.coPedido }) }}" class="btn btn-xs btn-warning" title="Detalhar">
+                                    </td>                                            <td><a href="{{ path('admin_refeicao_show', { 'id': entity.coRefeicao }) }}">{{ entity.coRefeicao }}</a></td>                                            <td>{% if entity.isEntregue == 1 %} <span class="label label-success arrowed-in">Sim</span> {% else %} <span class="label label-danger arrowed-in">Não</span> {% endif %}</td>                                            <td>{% if entity.dtEntrega %}{{ entity.dtEntrega|date('d/m/Y H:i:s') }}{% endif %}</td>                                            <td>{% if entity.isAtivo == 1 %} <span class="label label-success arrowed-in">Sim</span> {% else %} <span class="label label-danger arrowed-in">Não</span> {% endif %}</td>                                            <td>{{ entity.deObservacao }}</td>                                            <td><div class="hidden-sm hidden-xs btn-group">            <a href="{{ path('admin_refeicao_show', { 'id': entity.coRefeicao }) }}" class="btn btn-xs btn-warning" title="Detalhar">
             <i class="ace-icon fa fa-search-plus bigger-120"></i>
         </a>
-                        <a href="{{ path('admin_pedido_edit', { 'id': entity.coPedido }) }}" class="btn btn-xs btn-info" title="Editar">
+                        <a href="{{ path('admin_refeicao_edit', { 'id': entity.coRefeicao }) }}" class="btn btn-xs btn-info" title="Editar">
             <i class="ace-icon fa fa-pencil bigger-120"></i>
         </a>
-        <a class="btn btn-xs btn-danger btn-delete" id="{{ entity.coPedido }}" title="Deletar">
+        <a class="btn btn-xs btn-danger btn-delete" id="{{ entity.coRefeicao }}" title="Deletar">
         <i class="ace-icon fa fa-trash-o bigger-120"></i>
     </a>
 </div>
@@ -48,21 +48,21 @@
         </button>
 
         <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">                            <li>
-                    <a href="{{ path('admin_pedido_show', { 'id': entity.coPedido }) }}" title="Detalhar" data-rel="tooltip" class="tooltip-info" href="#" data-original-title="Detalhar">
+                    <a href="{{ path('admin_refeicao_show', { 'id': entity.coRefeicao }) }}" title="Detalhar" data-rel="tooltip" class="tooltip-info" href="#" data-original-title="Detalhar">
                         <span class="blue">
                             <i class="ace-icon fa fa-search-plus bigger-120"></i>
                         </span>
                     </a>
                 </li>
                                                                 <li>
-                    <a href="{{ path('admin_pedido_edit', { 'id': entity.coPedido }) }}" title="Editar" data-rel="tooltip" class="tooltip-success" href="#" data-original-title="Editar">
+                    <a href="{{ path('admin_refeicao_edit', { 'id': entity.coRefeicao }) }}" title="Editar" data-rel="tooltip" class="tooltip-success" href="#" data-original-title="Editar">
                         <span class="green">
                             <i class="ace-icon fa fa-pencil bigger-120"></i>
                         </span>
                     </a>
                 </li>
                         <li>
-                <a title="Deletar" data-rel="tooltip" id="{{ entity.coPedido }}" class="tooltip-error btn-delete" href="#" data-original-title="Deletar">
+                <a title="Deletar" data-rel="tooltip" id="{{ entity.coRefeicao }}" class="tooltip-error btn-delete" href="#" data-original-title="Deletar">
                     <span class="red">
                         <i class="ace-icon fa fa-trash-o bigger-120"></i>
                     </span>
@@ -82,7 +82,7 @@
             <br />
         <div class="row">
             <div class="col-xs-12">
-                <a class="btn" href="{{ path('admin_pedido_new') }}">
+                <a class="btn" href="{{ path('admin_refeicao_new') }}">
                     <i class="ace-icon fa fa-plus bigger-120"></i>
                     Novo
                 </a>

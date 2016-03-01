@@ -1,27 +1,28 @@
     {% extends 'NutrirBoxBundle::base.html.twig' %}
-    {% block title %} Pedido {% endblock %}
-    {% block header %} Pedido {% endblock %}
+    {% block title %} Refeicao {% endblock %}
+    {% block header %} Refeicao {% endblock %}
     {% block subheader %} Detalhe {% endblock %}
 
 {% block body -%}
     <div class="profile-user-info profile-user-info-striped">
             <div class="profile-info-row">
-                <div class="profile-info-name"> Pedido </div>
+                <div class="profile-info-name"> Refeicao </div>
                 <!-- integer -->                <div class="profile-info-value">
-                    <span>{{ entity.coPedido }}</span>
+                    <span>{{ entity.coRefeicao }}</span>
                 </div>
             </div>
             <div class="profile-info-row">
-                <div class="profile-info-name"> Referencia </div>
-                <!-- string -->                <div class="profile-info-value">
-                    <span>{{ entity.nuReferencia }}</span>
+                <div class="profile-info-name"> Entregue </div>
+                <!-- boolean -->                
+                <div class="profile-info-value">
+                    <span>{% if entity.isEntregue == 1 %} Sim {% else %} Não {% endif %}</span>
                 </div>
             </div>
             <div class="profile-info-row">
-                <div class="profile-info-name"> Cadastro </div>
+                <div class="profile-info-name"> Entrega </div>
                 <!-- datetime -->                
                 <div class="profile-info-value">                    
-                                        <span> {{ entity.dtCadastro != '' ? entity.dtCadastro|date('d/m/Y h:i:s') : '' }} </span>
+                                        <span> {{ entity.dtEntrega != '' ? entity.dtEntrega|date('d/m/Y h:i:s') : '' }} </span>
                 </div>
             </div>
             <div class="profile-info-row">
@@ -31,16 +32,22 @@
                     <span>{% if entity.isAtivo == 1 %} Sim {% else %} Não {% endif %}</span>
                 </div>
             </div>
+            <div class="profile-info-row">
+                <div class="profile-info-name"> Observacao </div>
+                <!-- text -->                <div class="profile-info-value">
+                    <span>{{ entity.deObservacao }}</span>
+                </div>
+            </div>
     </div>
         
     <div class="hr dotted"></div>
 
         <p>
-    <a href="{{ path('admin_pedido') }}" class="btn">
+    <a href="{{ path('admin_refeicao') }}" class="btn">
         <i class="ace-icon fa fa-arrow-left bigger-120"></i>
         Listar
     </a>
-            <a href="{{ path('admin_pedido_edit', { 'id': entity.coPedido }) }}" class="btn">
+            <a href="{{ path('admin_refeicao_edit', { 'id': entity.coRefeicao }) }}" class="btn">
             <i class="ace-icon fa fa-pencil bigger-120"></i>
             Editar
         </a>

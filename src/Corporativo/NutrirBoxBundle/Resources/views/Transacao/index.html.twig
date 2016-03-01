@@ -20,7 +20,7 @@
                                             <input type="checkbox" class="ace" />
                                             <span class="lbl"></span>
                                         </label>
-                                    </th>                                        <th>Transacao</th>                                        <th>Nome</th>                                        <th>Descricao</th>                                        <th>Ativo</th>                                    <th>Ações</th>
+                                    </th>                                        <th>Transacao</th>                                        <th>Nome</th>                                        <th>Ativo</th>                                        <th>Descricao</th>                                    <th>Ações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -31,7 +31,7 @@
                                             <input type="checkbox" class="ace" />
                                             <span class="lbl"></span>
                                         </label>
-                                    </td>                                            <td><a href="{{ path('admin_transacao_show', { 'id': entity.coTransacao }) }}">{{ entity.coTransacao }}</a></td>                                            <td>{{ entity.noNome }}</td>                                            <td>{{ entity.deDescricao }}</td>                                            <td>{% if entity.isAtivo == 1 %} <span class="label label-success arrowed-in">Sim</span> {% else %} <span class="label label-danger arrowed-in">Não</span> {% endif %}</td>                                            <td><div class="hidden-sm hidden-xs btn-group">            <a href="{{ path('admin_transacao_show', { 'id': entity.coTransacao }) }}" class="btn btn-xs btn-warning" title="Detalhar">
+                                    </td>                                            <td><a href="{{ path('admin_transacao_show', { 'id': entity.coTransacao }) }}">{{ entity.coTransacao }}</a></td>                                            <td>{{ entity.noNome }}</td>                                            <td>{% if entity.isAtivo == 1 %} <span class="label label-success arrowed-in">Sim</span> {% else %} <span class="label label-danger arrowed-in">Não</span> {% endif %}</td>                                            <td>{{ entity.deDescricao }}</td>                                            <td><div class="hidden-sm hidden-xs btn-group">            <a href="{{ path('admin_transacao_show', { 'id': entity.coTransacao }) }}" class="btn btn-xs btn-warning" title="Detalhar">
             <i class="ace-icon fa fa-search-plus bigger-120"></i>
         </a>
                         <a href="{{ path('admin_transacao_edit', { 'id': entity.coTransacao }) }}" class="btn btn-xs btn-info" title="Editar">
