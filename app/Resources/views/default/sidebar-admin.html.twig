@@ -28,7 +28,7 @@
             </ul>
         </li>
         <li class="{% if app.request.attributes.get('_route') starts with 'admin_pessoa' %}active{% endif %}">
-            <a href="{{ path('admin_pessoa') }}" class="dropdown-toggle">
+            <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-users"></i>
                 <span class="menu-text">
                     Clientes
@@ -38,14 +38,14 @@
             <b class="arrow"></b>
             <ul class="submenu">
                 <li class="{% if app.request.attributes.get('_route') starts with 'admin_pessoa' %}active{% endif %}">
-                    <a href="">
+                    <a href="{{ path('admin_pessoa') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Lista
                     </a>
                     <b class="arrow"></b>
                 </li>
                 <li class="{% if app.request.attributes.get('_route') starts with 'admin_pessoa' %}active{% endif %}">
-                    <a href="">
+                    <a href="{{ path('admin_pessoa_new') }}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         Adicionar
                     </a>
